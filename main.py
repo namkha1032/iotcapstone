@@ -6,7 +6,7 @@ import time
 AIO_FEED_ID = "iot.light"
 AIO_FEED_ID2 = "iot.fan"
 AIO_USERNAME = "nguyennamkha"
-AIO_KEY = "aio_uHZr29Iu1U1aVqVbWJWeSuSEvOmz"
+AIO_KEY = "aio_LINY02cX8L87ojSSGd6k78FXRmQ4"
 
 def connected(client):
     print ("Connect successfully...")
