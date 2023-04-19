@@ -32,7 +32,9 @@
           <div class="sidebar-header position-relative">
             <div class="d-flex justify-content-between align-items-center">
               <div class="logo">
-                <a href="1dashboard.html" style="font-size:1.3rem">sleep monitor</a>
+                <a href="1dashboard.html" style="font-size: 1.3rem"
+                  >sleep monitor</a
+                >
               </div>
               <div class="theme-toggle d-flex gap-2 align-items-center mt-2">
                 <svg
@@ -304,7 +306,7 @@
           </div>
           <div class="page-content">
             <section class="section">
-              <div class="card">
+              <div class="card border border-dark h-100">
                 <div class="card-body">
                   <table class="table table-striped" id="table1">
                     <thead>
@@ -316,116 +318,7 @@
                         <th>Sleep quality</th>
                       </tr>
                     </thead>
-                    <tbody>
-                      <tr>
-                        <td>Sun Apr 02 2023</td>
-                        <td>30 <sup>o</sup>C</td>
-                        <td>50%</td>
-                        <td>80%</td>
-                        <td>
-                          <span class="badge bg-success">Good</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Sun Apr 02 2023</td>
-                        <td>30 <sup>o</sup>C</td>
-                        <td>50%</td>
-                        <td>80%</td>
-                        <td>
-                          <span class="badge bg-success">Good</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Sun Apr 02 2023</td>
-                        <td>30 <sup>o</sup>C</td>
-                        <td>50%</td>
-                        <td>80%</td>
-                        <td>
-                          <span class="badge bg-success">Good</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Sun Apr 02 2023</td>
-                        <td>30 <sup>o</sup>C</td>
-                        <td>50%</td>
-                        <td>80%</td>
-                        <td>
-                          <span class="badge bg-danger">Bad</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Sun Apr 02 2023</td>
-                        <td>30 <sup>o</sup>C</td>
-                        <td>50%</td>
-                        <td>80%</td>
-                        <td>
-                          <span class="badge bg-success">Good</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Sun Apr 02 2023</td>
-                        <td>30 <sup>o</sup>C</td>
-                        <td>50%</td>
-                        <td>80%</td>
-                        <td>
-                          <span class="badge bg-success">Good</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Sun Apr 02 2023</td>
-                        <td>30 <sup>o</sup>C</td>
-                        <td>50%</td>
-                        <td>80%</td>
-                        <td>
-                          <span class="badge bg-success">Good</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Sun Apr 02 2023</td>
-                        <td>30 <sup>o</sup>C</td>
-                        <td>50%</td>
-                        <td>80%</td>
-                        <td>
-                          <span class="badge bg-danger">Bad</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Sun Apr 02 2023</td>
-                        <td>30 <sup>o</sup>C</td>
-                        <td>50%</td>
-                        <td>80%</td>
-                        <td>
-                          <span class="badge bg-success">Good</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Sun Apr 02 2023</td>
-                        <td>30 <sup>o</sup>C</td>
-                        <td>50%</td>
-                        <td>80%</td>
-                        <td>
-                          <span class="badge bg-success">Good</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Sun Apr 02 2023</td>
-                        <td>30 <sup>o</sup>C</td>
-                        <td>50%</td>
-                        <td>80%</td>
-                        <td>
-                          <span class="badge bg-success">Good</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Sun Apr 02 2023</td>
-                        <td>30 <sup>o</sup>C</td>
-                        <td>50%</td>
-                        <td>80%</td>
-                        <td>
-                          <span class="badge bg-danger">Bad</span>
-                        </td>
-                      </tr>
-                    </tbody>
+                    <tbody id="tbl"></tbody>
                   </table>
                 </div>
               </div>
@@ -450,13 +343,14 @@
         </footer>
       </div>
     </div>
+    <script src="assets/static/js/pages/2history.js"></script>
     <script src="assets/static/js/components/dark.js"></script>
     <script src="assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 
     <script src="assets/compiled/js/app.js"></script>
 
-    <script src="assets/extensions/simple-datatables/umd/simple-datatables.js"></script>
-    <script src="assets/static/js/pages/simple-datatables.js"></script>
+    <script src="assets/extensions/simple-datatables/umd/simple-datatables.js" ></script>
+    <script src="assets/static/js/pages/simple-datatables.js" ></script>
 
     <script src="assets/extensions/chart.js/chart.umd.js"></script>
     <script src="assets/static/js/pages/ui-chartjs.js"></script>

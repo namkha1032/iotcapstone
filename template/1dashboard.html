@@ -27,7 +27,9 @@
           <div class="sidebar-header position-relative">
             <div class="d-flex justify-content-between align-items-center">
               <div class="logo">
-                <a href="1dashboard.html" style="font-size:1.3rem">sleep monitor</a>
+                <a href="1dashboard.html" style="font-size: 1.3rem"
+                  >sleep monitor</a
+                >
               </div>
               <div class="theme-toggle d-flex gap-2 align-items-center mt-2">
                 <svg
@@ -116,7 +118,6 @@
                   <span>Control</span>
                 </a>
               </li>
-
             </ul>
           </div>
         </div>
@@ -302,7 +303,7 @@
             <section class="section">
               <div class="row">
                 <div class="col-md-3 mb-4">
-                  <div class="card h-100">
+                  <div class="card border border-dark h-100">
                     <div class="card-body">
                       <h5 class="card-title pb-3">Current environment</h5>
                       <form class="form form-horizontal">
@@ -311,34 +312,26 @@
                             <i class="bi-thermometer"></i>
                             <label>Temperature</label>
                           </div>
-                          <div class="col-md-7 form-group">
-                            <span
-                              class="form-control"
-                              readonly
-                            >
-                            30 <sup>o</sup>C
-                          </span>
-                          </div>
+                          <div
+                            id="currentTemp"
+                            class="col-md-7 form-group"
+                          ></div>
                           <div class="col-md-5">
                             <i class="bi-droplet-half"></i>
                             <label>Humidity</label>
                           </div>
-                          <div class="col-md-7 form-group">
-                            <span
-                              class="form-control"
-                              readonly
-                            >30%</span>
-                          </div>
+                          <div
+                            id="currentHumid"
+                            class="col-md-7 form-group"
+                          ></div>
                           <div class="col-md-5">
                             <i class="bi-lightbulb"></i>
                             <label>Light</label>
                           </div>
-                          <div class="col-md-7 form-group">
-                            <span
-                              class="form-control"
-                              readonly
-                            >50%</span>
-                          </div>
+                          <div
+                            id="currentLight"
+                            class="col-md-7 form-group"
+                          ></div>
                         </div>
                       </form>
                       <h5 class="card-title pb-3 pt-4">Ideal environment</h5>
@@ -349,32 +342,23 @@
                             <label>Temperature</label>
                           </div>
                           <div class="col-md-7 form-group">
-                            <span
-                              class="form-control"
-                              readonly
-                            >
-                            30 <sup>o</sup>C
-                          </span>
+                            <span class="form-control" readonly>
+                              30 <sup>o</sup>C
+                            </span>
                           </div>
                           <div class="col-md-5">
                             <i class="bi-droplet-half"></i>
                             <label>Humidity</label>
                           </div>
                           <div class="col-md-7 form-group">
-                            <span
-                              class="form-control"
-                              readonly
-                            >30%</span>
+                            <span class="form-control" readonly>30%</span>
                           </div>
                           <div class="col-md-5">
                             <i class="bi-lightbulb"></i>
                             <label>Light</label>
                           </div>
                           <div class="col-md-7 form-group">
-                            <span
-                              class="form-control"
-                              readonly
-                            >50%</span>
+                            <span class="form-control" readonly>50%</span>
                           </div>
                         </div>
                       </form>
@@ -382,91 +366,13 @@
                   </div>
                 </div>
                 <div class="col-md-3 mb-4">
-                  <div class="card h-100">
-                    <div class="card-body pb-0">
-                      <h5 class="card-title pb-3">Last night environment</h5>
-                      <form class="form form-horizontal">
-                        <div class="row">
-                          <div class="col-md-5">
-                            <i class="bi-thermometer"></i>
-                            <label>Temperature</label>
-                          </div>
-                          <div class="col-md-7 form-group">
-                            <span
-                              class="form-control"
-                              readonly
-                            >
-                            30 <sup>o</sup>C
-                          </span>
-                          </div>
-                          <div class="col-md-5">
-                            <i class="bi-droplet-half"></i>
-                            <label>Humidity</label>
-                          </div>
-                          <div class="col-md-7 form-group">
-                            <span
-                              class="form-control"
-                              readonly
-                            >30%</span>
-                          </div>
-                          <div class="col-md-5">
-                            <i class="bi-lightbulb"></i>
-                            <label>Light</label>
-                          </div>
-                          <div class="col-md-7 form-group">
-                            <span
-                              class="form-control"
-                              readonly
-                            >50%</span>
-                          </div>
-                        </div>
-                      </form>
-                      <h5 class="card-title pb-3 pt-4">
-                        Did you sleep well last night?
-                      </h5>
-                      <form action="">
-                        <div class="form-check">
-                          <input
-                            class="form-check-input"
-                            type="radio"
-                            name="sleepWell"
-                            id="sleepYes"
-                          />
-                          <label
-                            class="form-check-label"
-                            for="sleepYes"
-                          >
-                            Yes
-                          </label>
-                        </div>
-                        <div class="form-check">
-                          <input
-                            class="form-check-input"
-                            type="radio"
-                            name="sleepWell"
-                            id="sleepNo"
-                          />
-                          <label
-                            class="form-check-label"
-                            for="sleepNo"
-                          >
-                            No
-                          </label>
-                        </div>
-                        <div class="d-flex justify-content-end">
-                          <button
-                            type="submit"
-                            class="btn btn-primary me-1 mb-1"
-                          >
-                            Submit
-                          </button>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
+                  <div
+                    id="irStatus"
+                    class="card border border-dark h-100"
+                  ></div>
                 </div>
                 <div class="col-md-6 mb-4">
-                  <div class="card h-100">
+                  <div class="card border border-dark h-100">
                     <div class="card-header">
                       <h4 class="card-title">Light Chart</h4>
                     </div>
@@ -476,7 +382,7 @@
                   </div>
                 </div>
                 <div class="col-md-6">
-                  <div class="card">
+                  <div class="card border border-dark h-100">
                     <div class="card-header">
                       <h4 class="card-title">Temperature Chart</h4>
                     </div>
@@ -486,7 +392,7 @@
                   </div>
                 </div>
                 <div class="col-md-6">
-                  <div class="card">
+                  <div class="card border border-dark h-100">
                     <div class="card-header">
                       <h4 class="card-title">Humidity Chart</h4>
                     </div>
@@ -517,12 +423,398 @@
         </footer>
       </div>
     </div>
+    <script src="assets/extensions/chart.js/chart.umd.js"></script>
+    <!-- <script src="assets/static/js/pages/ui-chartjs.js"></script> -->
+    <!-- ----------------------------------------------------------------------------------------------------------------------------------------------------- -->
+    <script>
+      // Some functions
+      function setLabels(labels) {
+        var newTime = new Date();
+        newTime = newTime.toLocaleTimeString();
+        labels.push(newTime);
+        labels.shift();
+      }
+      function setData(data, newData) {
+        data.push(newData);
+        data.shift();
+      }
+      async function fetchStuff(str) {
+        const response = await fetch(str);
+        const data = await response.json();
+        return data;
+      }
+      var currTime = new Date();
+      currTime = currTime.toLocaleTimeString();
+      // Options for charts
+      var options = {
+        animation: false,
+        //Boolean - If we want to override with a hard coded scale
+        scaleOverride: true,
+        //** Required if scaleOverride is true **
+        //Number - The number of steps in a hard coded scale
+        scaleSteps: 10,
+        //Number - The value jump in the hard coded scale
+        scaleStepWidth: 10,
+        //Number - The scale starting value
+        scaleStartValue: 0,
+      };
+      // Draw temp chart
+      var tempchart = document.getElementById("temp").getContext("2d");
+      var tempChartData = {
+        labels: [
+          currTime,
+          currTime,
+          currTime,
+          currTime,
+          currTime,
+          currTime,
+          currTime,
+        ],
+        datasets: [
+          {
+            label: "Current temperature",
+            fillColor: "rgba(220,220,220,0.2)",
+            strokeColor: "rgba(220,220,220,1)",
+            pointColor: "rgba(220,220,220,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(220,220,220,1)",
+            data: [0, 0, 0, 0, 0, 0, 0],
+          },
+        ],
+      };
+      var tempconfig = new Chart(tempchart, {
+        type: "line",
+        data: tempChartData,
+        options: options,
+      });
+      // Draw humid chart
+      var humidchart = document.getElementById("humid").getContext("2d");
+      var humidChartData = {
+        labels: [
+          currTime,
+          currTime,
+          currTime,
+          currTime,
+          currTime,
+          currTime,
+          currTime,
+        ],
+        datasets: [
+          {
+            label: "Current humid",
+            fillColor: "rgba(220,220,220,0.2)",
+            strokeColor: "rgba(220,220,220,1)",
+            pointColor: "rgba(220,220,220,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(220,220,220,1)",
+            data: [0, 0, 0, 0, 0, 0, 0],
+          },
+        ],
+      };
+      var humidconfig = new Chart(humidchart, {
+        type: "line",
+        data: humidChartData,
+        options: options,
+      });
+      // Draw light chart
+      var lightchart = document.getElementById("light").getContext("2d");
+      var lightChartData = {
+        labels: [
+          currTime,
+          currTime,
+          currTime,
+          currTime,
+          currTime,
+          currTime,
+          currTime,
+        ],
+        datasets: [
+          {
+            label: "Current light",
+            fillColor: "rgba(220,220,220,0.2)",
+            strokeColor: "rgba(220,220,220,1)",
+            pointColor: "rgba(220,220,220,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(220,220,220,1)",
+            data: [0, 0, 0, 0, 0, 0, 0],
+          },
+        ],
+      };
+      var lightconfig = new Chart(lightchart, {
+        type: "line",
+        data: lightChartData,
+        options: options,
+      });
+
+      let i = 0;
+      let tempArray = [];
+      let humidArray = [];
+      let lightArray = [];
+
+      let tempAverage = -1;
+      let humidAverage = -1;
+      let lightAverage = -1;
+      let sleepT = -1;
+      function callAdafruit() {
+        fetchStuff("https://io.adafruit.com/api/v2/nguyennamkha/feeds").then(
+          (ada) => {
+            // Check IR status
+            if (ada[5].last_value == 0) {
+              if (tempAverage != -1) {
+                // Example POST method implementation:
+                async function postData(url = "", data = {}) {
+                  // Default options are marked with *
+                  const response = await fetch(url, {
+                    method: "POST", // *GET, POST, PUT, DELETE, etc.
+                    mode: "cors", // no-cors, *cors, same-origin
+                    cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+                    credentials: "same-origin", // include, *same-origin, omit
+                    headers: {
+                      "Content-Type": "application/json",
+                      // 'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: JSON.stringify(data), // body data type must match "Content-Type" header
+                  });
+                  return response.json(); // parses JSON response into native JavaScript objects
+                }
+                let newHis = {
+                  sleepTime: sleepT,
+                  wakeTime: new Date(),
+                  temp: tempAverage,
+                  humid: humidAverage,
+                  light: lightAverage,
+                  quality: "good",
+                };
+                postData("http://localhost:3000/history", newHis).then(
+                  (data) => {
+                    tempAverage = -1;
+                    humidAverage = -1;
+                    lightAverage = -1;
+                    sleepT = -1;
+                    tempArray = [];
+                    humidArray = [];
+                    lightArray = [];
+                  }
+                );
+              }
+              fetchStuff("http://localhost:3000/history").then((history) => {
+                document.getElementById(
+                  "irStatus"
+                ).innerHTML = `<div class="card-body pb-0">
+                                <h5 class="card-title pb-3">Last night environment</h5>
+                                <form class="form form-horizontal">
+                                  <div class="row">
+                                    <div class="col-md-5">
+                                      <i class="bi-thermometer"></i>
+                                      <label>Temperature</label>
+                                    </div>
+                                    <div class="col-md-7 form-group">
+                                      <span class="form-control" readonly>
+                                        ${
+                                          history[history.length - 1].temp
+                                        } <sup>o</sup>C
+                                      </span>
+                                    </div>
+                                    <div class="col-md-5">
+                                      <i class="bi-droplet-half"></i>
+                                      <label>Humidity</label>
+                                    </div>
+                                    <div class="col-md-7 form-group">
+                                      <span class="form-control" readonly>
+                                        ${history[history.length - 1].humid} %
+                                      </span>
+                                    </div>
+                                    <div class="col-md-5">
+                                      <i class="bi-lightbulb"></i>
+                                      <label>Light</label>
+                                    </div>
+                                    <div class="col-md-7 form-group">
+                                      <span class="form-control" readonly>
+                                        ${history[history.length - 1].light} %
+                                      </span>
+                                    </div>
+                                  </div>
+                                </form>
+                                <div id ="qualityRender">
+                                  
+                                </div>
+                              </div>`;
+                if ((history[history.length - 1].quality == "na")) {
+                  document.getElementById(
+                  "qualityRender"
+                ).innerHTML = `<h5 class="card-title pb-3 pt-4">Did you sleep well last night?</h5>
+                                  <form action="">
+                                    <div class="form-check">
+                                      <input
+                                        class="form-check-input"
+                                        type="radio"
+                                        name="sleepWell"
+                                        id="sleepYes"
+                                      />
+                                      <label class="form-check-label" for="sleepYes">
+                                        Yes
+                                      </label>
+                                    </div>
+                                    <div class="form-check">
+                                      <input
+                                        class="form-check-input"
+                                        type="radio"
+                                        name="sleepWell"
+                                        id="sleepNo"
+                                      />
+                                      <label class="form-check-label" for="sleepNo">
+                                        No
+                                      </label>
+                                    </div>
+                                    <div class="d-flex justify-content-end">
+                                      <button type="submit" class="btn btn-primary me-1 mb-1">
+                                        Submit
+                                      </button>
+                                    </div>
+                                  </form>`
+                                  
+                }
+                if ((history[history.length - 1].quality == "good")) {
+                  document.getElementById(
+                  "qualityRender"
+                ).innerHTML = `<h5 class="card-title pb-3 pt-4" style="color:green">You had a good sleep</h5>`
+                                  
+                }
+                if ((history[history.length - 1].quality == "bad")) {
+                  document.getElementById(
+                  "qualityRender"
+                ).innerHTML = `<h5 class="card-title pb-3 pt-4" style="color:red">You had a bad sleep</h5>`
+                                  
+                }
+              });
+            } else {
+              if (sleepT == -1) {
+                sleepT = new Date();
+              }
+              tempArray.push(parseFloat(ada[2].last_value));
+              humidArray.push(parseFloat(ada[1].last_value));
+              lightArray.push(parseFloat(ada[0].last_value));
+              // console.log(tempArray)
+              // console.log(humidArray)
+              // console.log(lightArray)
+              tempAverage = parseInt(
+                tempArray.reduce((a, b) => a + b, 0) / tempArray.length
+              );
+              humidAverage = parseInt(
+                humidArray.reduce((a, b) => a + b, 0) / humidArray.length
+              );
+              lightAverage = parseInt(
+                lightArray.reduce((a, b) => a + b, 0) / lightArray.length
+              );
+              console.log(tempAverage);
+              console.log(humidAverage);
+              console.log(lightAverage);
+              document.getElementById(
+                "irStatus"
+              ).innerHTML = `<div class="card-body pb-0">
+                      <h5 class="card-title pb-3">Average environment</h5>
+                      <form class="form form-horizontal">
+                        <div class="row">
+                          <div class="col-md-5">
+                            <i class="bi-thermometer"></i>
+                            <label>Temperature</label>
+                          </div>
+                          <div class="col-md-7 form-group">
+                            <span class="form-control" readonly>
+                              ${tempAverage} <sup>o</sup>C
+                            </span>
+                          </div>
+                          <div class="col-md-5">
+                            <i class="bi-droplet-half"></i>
+                            <label>Humidity</label>
+                          </div>
+                          <div class="col-md-7 form-group">
+                            <span class="form-control" readonly>${humidAverage} %</span>
+                          </div>
+                          <div class="col-md-5">
+                            <i class="bi-lightbulb"></i>
+                            <label>Light</label>
+                          </div>
+                          <div class="col-md-7 form-group">
+                            <span class="form-control" readonly>${lightAverage} %</span>
+                          </div>
+                        </div>
+                      </form>
+                      <h5 class="card-title pb-3 pt-4" style="color:orange">You are sleeping!</h5>
+                    </div>`;
+            }
+            // Update current environment
+            var newTemp = `<span
+                              class="form-control"
+                              readonly
+                            >
+                            ${ada[2].last_value} <sup>o</sup>C
+                            </span>`;
+            document.getElementById("currentTemp").innerHTML = newTemp;
+
+            var newHumid = `<span
+                              class="form-control"
+                              readonly
+                            >
+                            ${ada[1].last_value} %
+                            </span>`;
+            document.getElementById("currentHumid").innerHTML = newHumid;
+
+            var newLight = `<span
+                              class="form-control"
+                              readonly
+                            >
+                            ${ada[0].last_value} %
+                            </span>`;
+            document.getElementById("currentLight").innerHTML = newLight;
+            i++;
+            // Update new chart data
+            setData(
+              tempChartData.datasets[0].data,
+              parseFloat(ada[2].last_value)
+            );
+            setLabels(tempChartData.labels);
+            setData(
+              humidChartData.datasets[0].data,
+              parseFloat(ada[1].last_value)
+            );
+            setLabels(humidChartData.labels);
+            setData(
+              lightChartData.datasets[0].data,
+              parseFloat(ada[0].last_value)
+            );
+            setLabels(lightChartData.labels);
+            // Draw new charts
+            tempconfig.destroy();
+            tempconfig = new Chart(tempchart, {
+              type: "line",
+              data: tempChartData,
+              options: options,
+            });
+            humidconfig.destroy();
+            humidconfig = new Chart(humidchart, {
+              type: "line",
+              data: humidChartData,
+              options: options,
+            });
+            lightconfig.destroy();
+            lightconfig = new Chart(lightchart, {
+              type: "line",
+              data: lightChartData,
+              options: options,
+            });
+          }
+        );
+      }
+      callAdafruit();
+      setInterval(callAdafruit, 10000);
+    </script>
     <script src="assets/static/js/components/dark.js"></script>
     <script src="assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 
     <script src="assets/compiled/js/app.js"></script>
-
-    <script src="assets/extensions/chart.js/chart.umd.js"></script>
-    <script src="assets/static/js/pages/ui-chartjs.js"></script>
   </body>
 </html>

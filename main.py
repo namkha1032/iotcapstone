@@ -11,7 +11,7 @@ AIO_FEED_ID4 = "iot.device-led"
 AIO_FEED_ID5 = "iot.device-fan"
 
 AIO_USERNAME = "nguyennamkha"
-AIO_KEY = "hehe"
+AIO_KEY = "aio_mmmc34Q8jF6mXBhErKnPfOCvHjI4"
 def connected(client):
     print ("Connect successfully...")
     client.subscribe(AIO_FEED_ID)
@@ -63,12 +63,12 @@ while True:
     print ("Measured light is :", measuredLight )
     client.publish("iot.sensor-light", measuredLight)
     
-    measuredIR = random.randint(0, 1)
-    print ("Measured IR is :", measuredIR )
-    client.publish("iot.sensor-ir", measuredIR)
-    deviceLED = 1
-    if measuredIR == 1:
-        deviceLED = 0
-    print ("Device LED is :", deviceLED )
-    client.publish("iot.device-led", deviceLED)
-    time.sleep(15)
+    # measuredIR = random.randint(0, 1)
+    # print ("Measured IR is :", measuredIR )
+    # client.publish("iot.sensor-ir", measuredIR)
+    # deviceLED = 1
+    # if measuredIR == 1:
+    #     deviceLED = 0
+    # print ("Device LED is :", deviceLED )
+    # client.publish("iot.device-led", deviceLED)
+    time.sleep(10)
