@@ -22,6 +22,24 @@
     <link rel="stylesheet" href="./assets/compiled/css/table-datatable.css" />
     <link rel="stylesheet" href="./assets/compiled/css/app.css" />
     <link rel="stylesheet" href="./assets/compiled/css/app-dark.css" />
+    <link rel="stylesheet" href="./assets/compiled/css/mode.css" />
+    <link rel="stylesheet" href="./assets/compiled/css/led.css" />
+    <style>
+      #spinner {
+        height: 120px;
+        width: 120px;
+        border: 6px solid;
+        border-color: black transparent black transparent;
+        border-radius: 50%;
+        animation: spin 1.3s linear infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
   </head>
 
   <body>
@@ -32,7 +50,9 @@
           <div class="sidebar-header position-relative">
             <div class="d-flex justify-content-between align-items-center">
               <div class="logo">
-                <a href="1dashboard.html" style="font-size:1.3rem">sleep monitor</a>
+                <a href="1dashboard.html" style="font-size: 1.3rem"
+                  >sleep monitor</a
+                >
               </div>
               <div class="theme-toggle d-flex gap-2 align-items-center mt-2">
                 <svg
@@ -308,44 +328,7 @@
                 <div class="col-6 mb-4">
                   <div class="card border border-dark h-100">
                     <div class="card-header">
-                      <h4 class="card-title">Threshold Control</h4>
-                    </div>
-                    <div class="card-body">
-                      <form action="">
-                        <div class="row">
-                          <div class="col-6">
-                            <label for=""
-                              >Temperature threshold to turn on fan:
-                            </label>
-                          </div>
-                          <div class="col-6">
-                            <div class="input-group">
-                              <input
-                                type="number"
-                                class="form-control"
-                                value="25"
-                                placeholder=""
-                                aria-label="Example text with button addon"
-                                aria-describedby="button-addon1"
-                              />
-                              <button
-                                class="btn btn-primary"
-                                type="submit"
-                                id="button-addon1"
-                              >
-                                Set
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-6 mb-4">
-                  <div class="card border border-dark h-100">
-                    <div class="card-header">
-                      <h4 class="card-title">Device Control</h4>
+                      <h4 class="card-title">Fan Control</h4>
                     </div>
                     <div class="card-body">
                       <form action="">
@@ -360,8 +343,8 @@
                                   <div class="slidecontainer">
                                     <input
                                       type="range"
-                                      min="1"
-                                      max="4"
+                                      min="0"
+                                      max="3"
                                       class="slider"
                                       id="tempRange"
                                       style="width: 100%"
@@ -386,10 +369,25 @@
                               </div>
                             </form>
                           </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6 mb-4">
+                  <div class="card border border-dark h-100">
+                    <div class="card-header">
+                      <h4 class="card-title">LED Control</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                          
                           <div class="col-6 mb-4">
                             <label for="">Light switch: </label>
                           </div>
-                          <div class="col-6 mb-4 d-flex gap-3 align-items-center">
+                          <!-- <div
+                            class="col-6 mb-4 d-flex gap-3 align-items-center"
+                          >
                             <span>Off</span>
                             <div class="form-check form-switch">
                               <input
@@ -399,9 +397,29 @@
                               />
                             </div>
                             <span>On</span>
-                          </div>
+                          </div> -->
+                          <div class="switch col-6 mb-4 d-flex gap-3 align-items-center">
+                            <input type="checkbox" name="toggle" />
+                            <label for="toggle">
+                              <i class="bulb">
+                                <span class="bulb-center"></span>
+                                <span class="filament-1"></span>
+                                <span class="filament-2"></span>
+                                <span class="reflections">
+                                  <span></span>
+                                </span>
+                                <span class="sparks">
+                                  <i class="spark1"></i>
+                                  <i class="spark2"></i>
+                                  <i class="spark3"></i>
+                                  <i class="spark4"></i>
+                                </span>
+                              </i>
+                            </label>
+                          </d
                         </div>
-                      </form>
+                      
+                      <div id="spinner"></div>
                     </div>
                   </div>
                 </div>
@@ -427,6 +445,79 @@
         </footer>
       </div>
     </div>
+    <script>
+      document.getElementById("spinner").style.display = "none";
+      var slider = document.getElementById("tempRange");
+      var output = document.getElementById("tempOutput");
+      // output.innerHTML = slider.value; // Display the default slider value
+      // Update the current slider value (each time you drag the slider handle)
+      slider.oninput = function () {
+        output.innerHTML = this.value;
+      };
+      document
+        .getElementById("lightSwitch")
+        .addEventListener("click", turnLight);
+      async function turnLight(a) {
+        document.getElementById("spinner").style.display = "block";
+        // post
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+        myHeaders.append("X-AIO-Key", "aio_UUXY22ywIBFBDhbHBHK5eRILG0A1");
+        var urlencoded = new URLSearchParams();
+        if (a.target.checked == true) {
+          urlencoded.append("value", '"ON"');
+        } else {
+          urlencoded.append("value", '"OFF"');
+        }
+        var requestOptions = {
+          method: "POST",
+          headers: myHeaders,
+          body: urlencoded,
+          redirect: "follow",
+        };
+
+        await fetch(
+          "https://io.adafruit.com/api/v2/nguyennamkha/feeds/iot.device-led/data",
+          requestOptions
+        )
+          .then((response) => response.text())
+          // .then((result) => console.log(result))
+          .catch((error) => console.log("error", error));
+
+        document.getElementById("spinner").style.display = "none";
+      }
+      document
+        .getElementById("tempRange")
+        .addEventListener("click", changeFanSpeed);
+      function changeFanSpeed(a) {
+        console.log(a.target.value);
+      }
+      async function fetchStuff(str) {
+        const response = await fetch(str);
+        const data = await response.json();
+        return data;
+      }
+      async function callAda3() {
+        await fetchStuff(
+          "https://io.adafruit.com/api/v2/nguyennamkha/feeds"
+        ).then((ada) => {
+          // console.log(typeof ada)
+          // console.log(typeof ada[3].last_value)
+          // console.log(ada[3].last_value);
+          let status = ada[3].last_value;
+          if (status == '"ON"') {
+            document.getElementById("lightSwitch").checked = true;
+            console.log(123);
+          }
+          if (status == '"OFF"') {
+            document.getElementById("lightSwitch").checked = false;
+            console.log(456);
+          }
+        });
+      }
+      callAda3();
+      setInterval(callAda3, 2000);
+    </script>
     <script src="assets/static/js/components/dark.js"></script>
     <script src="assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 
@@ -437,14 +528,5 @@
 
     <script src="assets/extensions/chart.js/chart.umd.js"></script>
     <script src="assets/static/js/pages/ui-chartjs.js"></script>
-    <script>
-      var slider = document.getElementById("tempRange");
-      var output = document.getElementById("tempOutput");
-      output.innerHTML = slider.value; // Display the default slider value
-      // Update the current slider value (each time you drag the slider handle)
-      slider.oninput = function () {
-        output.innerHTML = this.value;
-      };
-    </script>
   </body>
 </html>

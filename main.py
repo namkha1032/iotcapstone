@@ -11,7 +11,7 @@ AIO_FEED_ID4 = "iot.device-led"
 AIO_FEED_ID5 = "iot.device-fan"
 
 AIO_USERNAME = "nguyennamkha"
-AIO_KEY = "aio_mmmc34Q8jF6mXBhErKnPfOCvHjI4"
+AIO_KEY = "aio_UUXY22ywIBFBDhbHBHK5eRILG0A1"
 def connected(client):
     print ("Connect successfully...")
     client.subscribe(AIO_FEED_ID)
@@ -44,16 +44,16 @@ while True:
     print ("Measured temperature is :", measuredTemp )
     client.publish("iot.sensor-temp", measuredTemp)
 
-    deviceFan = 0
-    if measuredTemp in range(0,11):
-        deviceFan = 0
-    if measuredTemp in range(11,21):
-        deviceFan = 1
-    if measuredTemp in range(21,31):
-        deviceFan = 2
-    if measuredTemp in range(31,41):
-        deviceFan = 3
-    client.publish("iot.device-fan", deviceFan)
+    # deviceFan = 0
+    # if measuredTemp in range(0,11):
+    #     deviceFan = 0
+    # if measuredTemp in range(11,21):
+    #     deviceFan = 1
+    # if measuredTemp in range(21,31):
+    #     deviceFan = 2
+    # if measuredTemp in range(31,41):
+    #     deviceFan = 3
+    # client.publish("iot.device-fan", deviceFan)
 
     measuredHumid = random.randint(0, 100)
     print ("Measured humidity is :", measuredHumid )

@@ -17,6 +17,23 @@
     />
     <link rel="stylesheet" href="./assets/compiled/css/app.css" />
     <link rel="stylesheet" href="./assets/compiled/css/app-dark.css" />
+    <link rel="stylesheet" href="./assets/compiled/css/fan.css" />
+    <link rel="stylesheet" href="./assets/compiled/css/mode.css" />
+    <link rel="stylesheet" href="./assets/compiled/css/led.css" />
+    <style>
+      #opaque {
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        z-index: 1000;
+        display: none;
+        background-color: black;
+        filter: alpha(opacity=30);
+        opacity: 0.3;
+      }
+    </style>
   </head>
 
   <body>
@@ -260,7 +277,7 @@
                       <hr class="dropdown-divider" />
                     </li>
                     <li>
-                      <a class="dropdown-item" href="#"
+                      <a class="dropdown-item" href="0login.html"
                         ><i class="icon-mid bi bi-box-arrow-left me-2"></i>
                         Logout</a
                       >
@@ -373,15 +390,96 @@
                 </div>
                 <div class="col-md-6 mb-4">
                   <div class="card border border-dark h-100">
-                    <div class="card-header">
-                      <h4 class="card-title">Light Chart</h4>
-                    </div>
-                    <div class="card-body">
-                      <canvas id="light"></canvas>
+                    <div class="row">
+                      <div class="col-6">
+                        <div class="card-header">
+                          <h4 class="card-title">Fan Control</h4>
+                        </div>
+                        <div class="card-body">
+                          <div
+                            class="can-toggle demo-rebrand-1"
+                            style="margin-left: 50px"
+                          >
+                            <input id="fanMode" type="checkbox" />
+                            <label for="fanMode">
+                              <div
+                                class="can-toggle__switch"
+                                data-checked="auto"
+                                data-unchecked="manual"
+                              ></div>
+                            </label>
+                          </div>
+                          <div class="container">
+                            <div class="donut-chart-block block">
+                              <div class="donut-chart">
+                                <div id="section1" class="clip">
+                                  <div class="item"></div>
+                                </div>
+                                <div id="section2" class="clip">
+                                  <div class="item"></div>
+                                </div>
+                                <div id="section3" class="clip">
+                                  <div class="item"></div>
+                                </div>
+                                <div class="center">
+                                  <span></span>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="range-slider" id="fanSliderBox">
+                              <input
+                                type="range"
+                                orient="vertical"
+                                min="0"
+                                max="100"
+                                id="fanSliderValue"
+                              />
+                              <div class="range-slider__bar"></div>
+                              <div class="range-slider__thumb"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="card-header">
+                          <h4 class="card-title">LED Control</h4>
+                        </div>
+                        <div class="card-body">
+                          <div class="switch">
+                            <input
+                              type="checkbox"
+                              name="toggle"
+                              id="ledSwitch"
+                            />
+                            <label for="toggle">
+                              <i class="bulb">
+                                <span class="bulb-center"></span>
+                                <span class="filament-1"></span>
+                                <span class="filament-2"></span>
+                                <span class="reflections">
+                                  <span></span>
+                                </span>
+                                <span class="sparks">
+                                  <i class="spark1"></i>
+                                  <i class="spark2"></i>
+                                  <i class="spark3"></i>
+                                  <i class="spark4"></i>
+                                </span>
+                              </i>
+                            </label>
+                          </div>
+                          <img
+                            id="loading"
+                            src="../z2.gif"
+                            style="width: 100%"
+                            alt=""
+                          />
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                   <div class="card border border-dark h-100">
                     <div class="card-header">
                       <h4 class="card-title">Temperature Chart</h4>
@@ -391,13 +489,23 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                   <div class="card border border-dark h-100">
                     <div class="card-header">
                       <h4 class="card-title">Humidity Chart</h4>
                     </div>
                     <div class="card-body">
                       <canvas id="humid"></canvas>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="card border border-dark h-100">
+                    <div class="card-header">
+                      <h4 class="card-title">Light Chart</h4>
+                    </div>
+                    <div class="card-body">
+                      <canvas id="light"></canvas>
                     </div>
                   </div>
                 </div>
@@ -428,6 +536,8 @@
     <!-- ----------------------------------------------------------------------------------------------------------------------------------------------------- -->
     <script>
       // Some functions
+      console.log(sessionStorage.getItem("sleep"));
+      document.getElementById("loading").style.display = "none";
       function setLabels(labels) {
         var newTime = new Date();
         newTime = newTime.toLocaleTimeString();
@@ -558,11 +668,14 @@
       let humidAverage = -1;
       let lightAverage = -1;
       let sleepT = -1;
+      let count = 0;
+      let jump = 2;
+      let limit = 10;
       function callAdafruit() {
         fetchStuff("https://io.adafruit.com/api/v2/nguyennamkha/feeds").then(
           (ada) => {
             // Check IR status
-            if (ada[5].last_value == 0) {
+            if (sessionStorage.getItem("sleep") == "no") {
               if (tempAverage != -1) {
                 // Example POST method implementation:
                 async function postData(url = "", data = {}) {
@@ -642,10 +755,10 @@
                                   
                                 </div>
                               </div>`;
-                if ((history[history.length - 1].quality == "na")) {
+                if (history[history.length - 1].quality == "na") {
                   document.getElementById(
-                  "qualityRender"
-                ).innerHTML = `<h5 class="card-title pb-3 pt-4">Did you sleep well last night?</h5>
+                    "qualityRender"
+                  ).innerHTML = `<h5 class="card-title pb-3 pt-4">Did you sleep well last night?</h5>
                                   <form action="">
                                     <div class="form-check">
                                       <input
@@ -674,20 +787,17 @@
                                         Submit
                                       </button>
                                     </div>
-                                  </form>`
-                                  
+                                  </form>`;
                 }
-                if ((history[history.length - 1].quality == "good")) {
+                if (history[history.length - 1].quality == "good") {
                   document.getElementById(
-                  "qualityRender"
-                ).innerHTML = `<h5 class="card-title pb-3 pt-4" style="color:green">You had a good sleep</h5>`
-                                  
+                    "qualityRender"
+                  ).innerHTML = `<h5 class="card-title pb-3 pt-4" style="color:green">You had a good sleep</h5>`;
                 }
-                if ((history[history.length - 1].quality == "bad")) {
+                if (history[history.length - 1].quality == "bad") {
                   document.getElementById(
-                  "qualityRender"
-                ).innerHTML = `<h5 class="card-title pb-3 pt-4" style="color:red">You had a bad sleep</h5>`
-                                  
+                    "qualityRender"
+                  ).innerHTML = `<h5 class="card-title pb-3 pt-4" style="color:red">You had a bad sleep</h5>`;
                 }
               });
             } else {
@@ -709,9 +819,9 @@
               lightAverage = parseInt(
                 lightArray.reduce((a, b) => a + b, 0) / lightArray.length
               );
-              console.log(tempAverage);
-              console.log(humidAverage);
-              console.log(lightAverage);
+              // console.log(tempAverage);
+              // console.log(humidAverage);
+              // console.log(lightAverage);
               document.getElementById(
                 "irStatus"
               ).innerHTML = `<div class="card-body pb-0">
@@ -771,49 +881,267 @@
                             </span>`;
             document.getElementById("currentLight").innerHTML = newLight;
             i++;
-            // Update new chart data
-            setData(
-              tempChartData.datasets[0].data,
-              parseFloat(ada[2].last_value)
+            if (count % 10 == 0) {
+              // Update new chart data
+              setData(
+                tempChartData.datasets[0].data,
+                parseFloat(ada[2].last_value)
+              );
+              setLabels(tempChartData.labels);
+              setData(
+                humidChartData.datasets[0].data,
+                parseFloat(ada[1].last_value)
+              );
+              setLabels(humidChartData.labels);
+              setData(
+                lightChartData.datasets[0].data,
+                parseFloat(ada[0].last_value)
+              );
+              setLabels(lightChartData.labels);
+              // Draw new charts
+              tempconfig.destroy();
+              tempconfig = new Chart(tempchart, {
+                type: "line",
+                data: tempChartData,
+                options: options,
+              });
+              humidconfig.destroy();
+              humidconfig = new Chart(humidchart, {
+                type: "line",
+                data: humidChartData,
+                options: options,
+              });
+              lightconfig.destroy();
+              lightconfig = new Chart(lightchart, {
+                type: "line",
+                data: lightChartData,
+                options: options,
+              });
+            }
+            // Update Fan mode
+            if (ada[5].last_value == '"AUTO"') {
+              document.getElementById("fanMode").checked = true;
+              document.getElementById("fanSliderBox").style.display = "none";
+            }
+            if (ada[5].last_value == '"MANU"') {
+              document.getElementById("fanMode").checked = false;
+              document.getElementById("fanSliderBox").style.display = "inline-block"
+                "inline-block";
+            }
+            // Update Fan slider value
+            // console.log("ada[4]", ada[4].last_value)
+            // console.log("slider", document.getElementById("fanSliderValue").value)
+            document.getElementById("fanSliderValue").value = parseInt(
+              ada[4].last_value
             );
-            setLabels(tempChartData.labels);
-            setData(
-              humidChartData.datasets[0].data,
-              parseFloat(ada[1].last_value)
+            console.log(
+              "fs value: ",
+              document.getElementById("fanSliderValue").value
             );
-            setLabels(humidChartData.labels);
-            setData(
-              lightChartData.datasets[0].data,
-              parseFloat(ada[0].last_value)
-            );
-            setLabels(lightChartData.labels);
-            // Draw new charts
-            tempconfig.destroy();
-            tempconfig = new Chart(tempchart, {
-              type: "line",
-              data: tempChartData,
-              options: options,
-            });
-            humidconfig.destroy();
-            humidconfig = new Chart(humidchart, {
-              type: "line",
-              data: humidChartData,
-              options: options,
-            });
-            lightconfig.destroy();
-            lightconfig = new Chart(lightchart, {
-              type: "line",
-              data: lightChartData,
-              options: options,
-            });
+            // Dumb function
+            function updateDonut(percent, element) {
+              //var percent = 45;
+              if (percent < 50) {
+                offset = (360 / 100) * percent;
+                element.parentNode.querySelector(
+                  "#section3"
+                ).style.webkitTransform = "rotate(" + offset + "deg)";
+                element.parentNode.querySelector(
+                  "#section3 .item"
+                ).style.webkitTransform = "rotate(" + (180 - offset) + "deg)";
+                element.parentNode.querySelector(
+                  "#section3"
+                ).style.msTransform = "rotate(" + offset + "deg)";
+                element.parentNode.querySelector(
+                  "#section3 .item"
+                ).style.msTransform = "rotate(" + (180 - offset) + "deg)";
+                element.parentNode.querySelector(
+                  "#section3"
+                ).style.MozTransform = "rotate(" + offset + "deg)";
+                element.parentNode.querySelector(
+                  "#section3 .item"
+                ).style.MozTransform = "rotate(" + (180 - offset) + "deg)";
+                element.parentNode.querySelector(
+                  "#section3 .item"
+                ).style.backgroundColor = "#E64C65";
+              } else {
+                offset = (360 / 100) * percent - 180;
+                element.parentNode.querySelector(
+                  "#section3"
+                ).style.webkitTransform = "rotate(180deg)";
+                element.parentNode.querySelector(
+                  "#section3 .item"
+                ).style.webkitTransform = "rotate(" + offset + "deg)";
+                element.parentNode.querySelector(
+                  "#section3"
+                ).style.msTransform = "rotate(180deg)";
+                element.parentNode.querySelector(
+                  "#section3 .item"
+                ).style.msTransform = "rotate(" + offset + "deg)";
+                element.parentNode.querySelector(
+                  "#section3"
+                ).style.MozTransform = "rotate(180deg)";
+                element.parentNode.querySelector(
+                  "#section3 .item"
+                ).style.MozTransform = "rotate(" + offset + "deg)";
+                element.parentNode.querySelector(
+                  "#section3 .item"
+                ).style.backgroundColor = "#41A8AB";
+              }
+              element.parentNode.querySelector("span").innerHTML =
+                percent + "%";
+            }
+
+            function updateSlider(element) {
+              if (element) {
+                var parent = element.parentElement;
+                var thumb = parent.querySelector(".range-slider__thumb"),
+                  bar = parent.querySelector(".range-slider__bar"),
+                  pct =
+                    element.value *
+                    ((parent.clientHeight - thumb.clientHeight) /
+                      parent.clientHeight);
+                thumb.style.bottom = pct + "%";
+                bar.style.height =
+                  "calc(" + pct + "% + " + thumb.clientHeight / 2 + "px)";
+                thumb.textContent = element.value + "%";
+              }
+              updateDonut(element.value, element.parentNode);
+            }
+            (function initAndSetupTheSliders() {
+              [].forEach.call(
+                document.getElementsByClassName("container"),
+                function (el) {
+                  var inputs = [].slice.call(
+                    el.querySelectorAll(".range-slider input")
+                  );
+                  inputs.forEach(function (input) {
+                    input.setAttribute("value", "50");
+                    updateSlider(input);
+                    input.addEventListener("input", function (element) {
+                      updateSlider(input);
+                    });
+                    input.addEventListener("change", function (element) {
+                      updateSlider(input);
+                    });
+                  });
+                }
+              );
+            })();
+            // Dumb function end
+            // Update LED
+            if (ada[3].last_value == '"ON"') {
+              document.getElementById("ledSwitch").checked = true;
+            }
+            if (ada[3].last_value == '"OFF"') {
+              document.getElementById("ledSwitch").checked = false;
+            }
+
+            count = count + jump;
           }
         );
       }
       callAdafruit();
-      setInterval(callAdafruit, 10000);
+      setInterval(callAdafruit, 2000);
+      // Send LED
+      document
+        .getElementById("ledSwitch")
+        .addEventListener("click", turnLight);
+      async function turnLight(a) {
+        document.getElementById("loading").style.display = "block";
+        // post
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+        myHeaders.append("X-AIO-Key", "aio_UUXY22ywIBFBDhbHBHK5eRILG0A1");
+        var urlencoded = new URLSearchParams();
+        if (a.target.checked == true) {
+          urlencoded.append("value", '"ON"');
+        } else {
+          urlencoded.append("value", '"OFF"');
+        }
+        var requestOptions = {
+          method: "POST",
+          headers: myHeaders,
+          body: urlencoded,
+          redirect: "follow",
+        };
+
+        await fetch(
+          "https://io.adafruit.com/api/v2/nguyennamkha/feeds/iot.device-led/data",
+          requestOptions
+        )
+          .then((response) => response.text())
+          // .then((result) => console.log(result))
+          .catch((error) => console.log("error", error));
+
+        document.getElementById("loading").style.display = "none";
+      }
+      // Send Mode
+      document
+        .getElementById("fanMode")
+        .addEventListener("click", changeMode);
+      async function changeMode(a) {
+        document.getElementById("loading").style.display = "block";
+        // post
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+        myHeaders.append("X-AIO-Key", "aio_UUXY22ywIBFBDhbHBHK5eRILG0A1");
+        var urlencoded = new URLSearchParams();
+        if (a.target.checked == true) {
+          urlencoded.append("value", '"AUTO"');
+        } else {
+          urlencoded.append("value", '"MANU"');
+        }
+        var requestOptions = {
+          method: "POST",
+          headers: myHeaders,
+          body: urlencoded,
+          redirect: "follow",
+        };
+
+        await fetch(
+          "https://io.adafruit.com/api/v2/nguyennamkha/feeds/iot.mode/data",
+          requestOptions
+        )
+          .then((response) => response.text())
+          // .then((result) => console.log(result))
+          .catch((error) => console.log("error", error));
+
+        document.getElementById("loading").style.display = "none";
+      }
+      // Send fan value
+      document
+        .getElementById("fanSliderValue")
+        .addEventListener("click", changeFanSpeed);
+      async function changeFanSpeed(a) {
+        document.getElementById("loading").style.display = "block";
+        // post
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+        myHeaders.append("X-AIO-Key", "aio_UUXY22ywIBFBDhbHBHK5eRILG0A1");
+        var urlencoded = new URLSearchParams();
+        urlencoded.append("value", a.target.value);
+        var requestOptions = {
+          method: "POST",
+          headers: myHeaders,
+          body: urlencoded,
+          redirect: "follow",
+        };
+
+        await fetch(
+          "https://io.adafruit.com/api/v2/nguyennamkha/feeds/iot.device-fan/data",
+          requestOptions
+        )
+          .then((response) => response.text())
+          // .then((result) => console.log(result))
+          .catch((error) => console.log("error", error));
+
+        document.getElementById("loading").style.display = "none";
+      }
     </script>
     <script src="assets/static/js/components/dark.js"></script>
     <script src="assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="assets/static/js/pages/fan.js"></script>
 
     <script src="assets/compiled/js/app.js"></script>
   </body>
