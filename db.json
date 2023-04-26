@@ -7,7 +7,8 @@
       "temp": "25",
       "humid": "30",
       "light": "50",
-      "quality": "good"
+      "quality": "good",
+      "username": "namkha"
     },
     {
       "sleepTime": "2023-04-15T12:27:15.656Z",
@@ -16,7 +17,8 @@
       "humid": 29,
       "light": 37,
       "quality": "good",
-      "id": 2
+      "id": 2,
+      "username": "namkha"
     },
     {
       "sleepTime": "2023-04-15T12:28:46.545Z",
@@ -25,7 +27,8 @@
       "humid": 58,
       "light": 55,
       "quality": "good",
-      "id": 3
+      "id": 3,
+      "username": "namkha"
     },
     {
       "sleepTime": "2023-04-15T12:41:25.253Z",
@@ -34,7 +37,8 @@
       "humid": 64,
       "light": 47,
       "quality": "good",
-      "id": 4
+      "id": 4,
+      "username": "ngochoa"
     },
     {
       "sleepTime": "2023-04-15T13:01:03.576Z",
@@ -43,61 +47,18 @@
       "humid": 16,
       "light": 36,
       "quality": "na",
-      "id": 5
+      "id": 5,
+      "username": "ngochoa"
+    }
+  ],
+  "user": [
+    {
+      "username": "namkha",
+      "password": "namkha"
     },
     {
-      "sleepTime": "2023-04-15T13:15:20.618Z",
-      "wakeTime": "2023-04-15T13:16:30.360Z",
-      "temp": 19,
-      "humid": 72,
-      "light": 32,
-      "quality": "na",
-      "id": 6
-    },
-    {
-      "sleepTime": "2023-04-15T13:19:04.288Z",
-      "wakeTime": "2023-04-15T13:19:14.300Z",
-      "temp": 26,
-      "humid": 97,
-      "light": 61,
-      "quality": "good",
-      "id": 7
-    },
-    {
-      "sleepTime": "2023-04-15T13:19:33.934Z",
-      "wakeTime": "2023-04-15T13:19:44.460Z",
-      "temp": 32,
-      "humid": 17,
-      "light": 5,
-      "quality": "bad",
-      "id": 8
-    },
-    {
-      "sleepTime": "2023-04-15T13:54:53.597Z",
-      "wakeTime": "2023-04-15T13:56:03.568Z",
-      "temp": 18,
-      "humid": 38,
-      "light": 42,
-      "quality": "bad",
-      "id": 9
-    },
-    {
-      "sleepTime": "2023-04-15T14:12:42.990Z",
-      "wakeTime": "2023-04-15T14:13:23.014Z",
-      "temp": 18,
-      "humid": 61,
-      "light": 28,
-      "quality": "bad",
-      "id": 10
-    },
-    {
-      "sleepTime": "2023-04-16T03:01:57.355Z",
-      "wakeTime": "2023-04-16T03:02:34.352Z",
-      "temp": 16,
-      "humid": 36,
-      "light": 53,
-      "quality": "good",
-      "id": 11
+      "username": "ngochoa",
+      "password": "ngochoa"
     }
   ]
 }

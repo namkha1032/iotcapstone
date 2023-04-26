@@ -535,6 +535,8 @@
     <!-- <script src="assets/static/js/pages/ui-chartjs.js"></script> -->
     <!-- ----------------------------------------------------------------------------------------------------------------------------------------------------- -->
     <script>
+      // key
+      let aiokey = "aio_JqXH23OJnNUDKtqXYIg8AG1vfWd3";
       // Some functions
       console.log(sessionStorage.getItem("sleep"));
       document.getElementById("loading").style.display = "none";
@@ -919,11 +921,11 @@
               });
             }
             // Update Fan mode
-            if (ada[5].last_value == '"AUTO"') {
+            if (ada[5].last_value == '"AUTO"' && sessionStorage.getItem("fetching") == "no") {
               document.getElementById("fanMode").checked = true;
               document.getElementById("fanSliderBox").style.display = "none";
             }
-            if (ada[5].last_value == '"MANU"') {
+            if (ada[5].last_value == '"MANU"' && sessionStorage.getItem("fetching") == "no") {
               document.getElementById("fanMode").checked = false;
               document.getElementById("fanSliderBox").style.display = "inline-block"
                 "inline-block";
@@ -1030,10 +1032,10 @@
             })();
             // Dumb function end
             // Update LED
-            if (ada[3].last_value == '"ON"') {
+            if (ada[3].last_value == '"ON"' && sessionStorage.getItem("fetching") == "no") {
               document.getElementById("ledSwitch").checked = true;
             }
-            if (ada[3].last_value == '"OFF"') {
+            if (ada[3].last_value == '"OFF"' && sessionStorage.getItem("fetching") == "no") {
               document.getElementById("ledSwitch").checked = false;
             }
 
@@ -1048,11 +1050,12 @@
         .getElementById("ledSwitch")
         .addEventListener("click", turnLight);
       async function turnLight(a) {
+        sessionStorage.setItem("fetching","yes");
         document.getElementById("loading").style.display = "block";
         // post
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
-        myHeaders.append("X-AIO-Key", "aio_UUXY22ywIBFBDhbHBHK5eRILG0A1");
+        myHeaders.append("X-AIO-Key", aiokey);
         var urlencoded = new URLSearchParams();
         if (a.target.checked == true) {
           urlencoded.append("value", '"ON"');
@@ -1075,17 +1078,19 @@
           .catch((error) => console.log("error", error));
 
         document.getElementById("loading").style.display = "none";
+        sessionStorage.setItem("fetching","no");
       }
       // Send Mode
       document
         .getElementById("fanMode")
         .addEventListener("click", changeMode);
       async function changeMode(a) {
+        sessionStorage.setItem("fetching","yes");
         document.getElementById("loading").style.display = "block";
         // post
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
-        myHeaders.append("X-AIO-Key", "aio_UUXY22ywIBFBDhbHBHK5eRILG0A1");
+        myHeaders.append("X-AIO-Key", aiokey);
         var urlencoded = new URLSearchParams();
         if (a.target.checked == true) {
           urlencoded.append("value", '"AUTO"');
@@ -1108,17 +1113,19 @@
           .catch((error) => console.log("error", error));
 
         document.getElementById("loading").style.display = "none";
+        sessionStorage.setItem("fetching","no");
       }
       // Send fan value
       document
         .getElementById("fanSliderValue")
         .addEventListener("click", changeFanSpeed);
       async function changeFanSpeed(a) {
+        sessionStorage.setItem("fetching","yes");
         document.getElementById("loading").style.display = "block";
         // post
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
-        myHeaders.append("X-AIO-Key", "aio_UUXY22ywIBFBDhbHBHK5eRILG0A1");
+        myHeaders.append("X-AIO-Key", aiokey);
         var urlencoded = new URLSearchParams();
         urlencoded.append("value", a.target.value);
         var requestOptions = {
@@ -1137,6 +1144,7 @@
           .catch((error) => console.log("error", error));
 
         document.getElementById("loading").style.display = "none";
+        sessionStorage.setItem("fetching","no");
       }
     </script>
     <script src="assets/static/js/components/dark.js"></script>

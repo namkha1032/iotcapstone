@@ -32,16 +32,17 @@
               /></a>
             </div>
             <h1 class="auth-title">Log in.</h1>
-            <p class="auth-subtitle mb-5">
+            <!-- <p class="auth-subtitle mb-5">
               Log in with your data that you entered during registration.
-            </p>
+            </p> -->
 
-            <form action="1dashboard.html">
+            <!-- <form action=""> -->
               <div class="form-group position-relative has-icon-left mb-4">
                 <input
                   type="text"
                   class="form-control form-control-xl"
                   placeholder="Username"
+                  id="usernameForm"
                 />
                 <div class="form-control-icon">
                   <i class="bi bi-person"></i>
@@ -52,12 +53,13 @@
                   type="password"
                   class="form-control form-control-xl"
                   placeholder="Password"
+                  id="passwordForm"
                 />
                 <div class="form-control-icon">
                   <i class="bi bi-shield-lock"></i>
                 </div>
               </div>
-              <div class="form-check form-check-lg d-flex align-items-end">
+              <!-- <div class="form-check form-check-lg d-flex align-items-end">
                 <input
                   class="form-check-input me-2"
                   type="checkbox"
@@ -70,11 +72,11 @@
                 >
                   Keep me logged in
                 </label>
-              </div>
-              <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5">
+              </div> -->
+              <button id="loginButton" class="btn btn-primary btn-block btn-lg shadow-lg mt-5">
                 Log in
               </button>
-            </form>
+            <!-- </form> -->
             <div class="text-center mt-5 text-lg fs-4">
               <p class="text-gray-600">
                 Don't have an account?
@@ -95,6 +97,12 @@
     </div>
     <script>
       sessionStorage.setItem("sleep","no");
+      sessionStorage.setItem("fetching","no");
+      document.getElementById("loginButton").addEventListener("click", handleLogin);
+      async function handleLogin(a){
+        console.log(typeof(document.getElementById("usernameForm").value));
+        console.log(typeof(document.getElementById("passwordForm").value));
+      }
     </script>
   </body>
 </html>
