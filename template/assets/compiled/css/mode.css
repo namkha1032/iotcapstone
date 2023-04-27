@@ -1,6 +1,9 @@
 /* body {
 	 padding: 30px;
 } */
+.can-toggle__switch{
+	cursor:pointer;
+}
  .can-toggle {
 	 position: relative;
 }

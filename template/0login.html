@@ -96,12 +96,24 @@
       </div>
     </div>
     <script>
+      async function fetchStuff(str) {
+        const response = await fetch(str);
+        const data = await response.json();
+        return data;
+      }
       sessionStorage.setItem("sleep","no");
       sessionStorage.setItem("fetching","no");
       document.getElementById("loginButton").addEventListener("click", handleLogin);
       async function handleLogin(a){
-        console.log(typeof(document.getElementById("usernameForm").value));
-        console.log(typeof(document.getElementById("passwordForm").value));
+        let username = document.getElementById("usernameForm").value
+        let password = document.getElementById("passwordForm").value
+        // 
+        await fetchStuff(`http://localhost:3000/history?username=${username}`).then(db=>{
+          // check valid
+          sessionStorage.setItem("username",username);
+          console.log(db);
+          window.location.href="1dashboard.html"
+        })
       }
     </script>
   </body>

@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="./assets/compiled/css/fan.css" />
     <link rel="stylesheet" href="./assets/compiled/css/mode.css" />
     <link rel="stylesheet" href="./assets/compiled/css/led.css" />
+    <link rel="stylesheet" href="./assets/compiled/css/daynight.css" />
     <style>
       #opaque {
         position: fixed;
@@ -383,10 +384,25 @@
                   </div>
                 </div>
                 <div class="col-md-3 mb-4">
-                  <div
-                    id="irStatus"
-                    class="card border border-dark h-100"
-                  ></div>
+                  <div id="hehe" class="card border border-dark h-100">
+                    <input id="toggle" class="switch" type="checkbox" />
+                    <div class="switch-day-night">
+                      <div class="top">
+                        <div class="sun-moon"></div>
+                        <div class="cloud a"><span></span></div>
+                        <div class="cloud b"><span></span></div>
+                        <div class="cloud c"><span></span></div>
+                      </div>
+                      <div class="bottom">
+                        <div
+                          class="text"
+                          data-day="It's morning!"
+                          data-night="Good night."
+                        ></div>
+                        <label class="label" for="toggle">&nbsp;</label>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <div class="col-md-6 mb-4">
                   <div class="card border border-dark h-100">
@@ -401,7 +417,7 @@
                             style="margin-left: 50px"
                           >
                             <input id="fanMode" type="checkbox" />
-                            <label for="fanMode">
+                            <label for="fanMode" id="modeBox">
                               <div
                                 class="can-toggle__switch"
                                 data-checked="auto"
@@ -445,7 +461,7 @@
                           <h4 class="card-title">LED Control</h4>
                         </div>
                         <div class="card-body">
-                          <div class="switch">
+                          <div class="switchLEDcss">
                             <input
                               type="checkbox"
                               name="toggle"
@@ -535,8 +551,9 @@
     <!-- <script src="assets/static/js/pages/ui-chartjs.js"></script> -->
     <!-- ----------------------------------------------------------------------------------------------------------------------------------------------------- -->
     <script>
-      // key
-      let aiokey = "aio_JqXH23OJnNUDKtqXYIg8AG1vfWd3";
+      // some var
+      let username = sessionStorage.getItem("username");
+      let aiokey = "aio_LxUX63KoboEKHadj72b9ZbhiWSCl";
       // Some functions
       console.log(sessionStorage.getItem("sleep"));
       document.getElementById("loading").style.display = "none";
@@ -676,24 +693,23 @@
       function callAdafruit() {
         fetchStuff("https://io.adafruit.com/api/v2/nguyennamkha/feeds").then(
           (ada) => {
-            // Check IR status
+            // Check sleeping status
             if (sessionStorage.getItem("sleep") == "no") {
               if (tempAverage != -1) {
                 // Example POST method implementation:
                 async function postData(url = "", data = {}) {
                   // Default options are marked with *
                   const response = await fetch(url, {
-                    method: "POST", // *GET, POST, PUT, DELETE, etc.
-                    mode: "cors", // no-cors, *cors, same-origin
-                    cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-                    credentials: "same-origin", // include, *same-origin, omit
+                    method: "POST",
+                    mode: "cors",
+                    cache: "no-cache",
+                    credentials: "same-origin",
                     headers: {
                       "Content-Type": "application/json",
-                      // 'Content-Type': 'application/x-www-form-urlencoded',
                     },
-                    body: JSON.stringify(data), // body data type must match "Content-Type" header
+                    body: JSON.stringify(data),
                   });
-                  return response.json(); // parses JSON response into native JavaScript objects
+                  return response.json();
                 }
                 let newHis = {
                   sleepTime: sleepT,
@@ -701,7 +717,7 @@
                   temp: tempAverage,
                   humid: humidAverage,
                   light: lightAverage,
-                  quality: "good",
+                  quality: "na",
                 };
                 postData("http://localhost:3000/history", newHis).then(
                   (data) => {
@@ -715,7 +731,10 @@
                   }
                 );
               }
-              fetchStuff("http://localhost:3000/history").then((history) => {
+              fetchStuff(
+                `http://localhost:3000/history?username=${username}`
+              ).then((history) => {
+                // Render last night environment
                 document.getElementById(
                   "irStatus"
                 ).innerHTML = `<div class="card-body pb-0">
@@ -758,6 +777,7 @@
                                 </div>
                               </div>`;
                 if (history[history.length - 1].quality == "na") {
+                  // If no answer yet
                   document.getElementById(
                     "qualityRender"
                   ).innerHTML = `<h5 class="card-title pb-3 pt-4">Did you sleep well last night?</h5>
@@ -806,9 +826,21 @@
               if (sleepT == -1) {
                 sleepT = new Date();
               }
-              tempArray.push(parseFloat(ada[2].last_value));
-              humidArray.push(parseFloat(ada[1].last_value));
-              lightArray.push(parseFloat(ada[0].last_value));
+              tempArray.push(
+                parseFloat(
+                  ada.find((obj) => obj.name == "SENSOR_TEMP").last_value
+                )
+              );
+              humidArray.push(
+                parseFloat(
+                  ada.find((obj) => obj.name == "SENSOR_HUMID").last_value
+                )
+              );
+              lightArray.push(
+                parseFloat(
+                  ada.find((obj) => obj.name == "SENSOR_LIGHT").last_value
+                )
+              );
               // console.log(tempArray)
               // console.log(humidArray)
               // console.log(lightArray)
@@ -863,7 +895,10 @@
                               class="form-control"
                               readonly
                             >
-                            ${ada[2].last_value} <sup>o</sup>C
+                            ${
+                              ada.find((obj) => obj.name == "SENSOR_TEMP")
+                                .last_value
+                            } <sup>o</sup>C
                             </span>`;
             document.getElementById("currentTemp").innerHTML = newTemp;
 
@@ -871,7 +906,10 @@
                               class="form-control"
                               readonly
                             >
-                            ${ada[1].last_value} %
+                            ${
+                              ada.find((obj) => obj.name == "SENSOR_HUMID")
+                                .last_value
+                            } %
                             </span>`;
             document.getElementById("currentHumid").innerHTML = newHumid;
 
@@ -879,7 +917,10 @@
                               class="form-control"
                               readonly
                             >
-                            ${ada[0].last_value} %
+                            ${
+                              ada.find((obj) => obj.name == "SENSOR_LIGHT")
+                                .last_value
+                            } %
                             </span>`;
             document.getElementById("currentLight").innerHTML = newLight;
             i++;
@@ -887,17 +928,23 @@
               // Update new chart data
               setData(
                 tempChartData.datasets[0].data,
-                parseFloat(ada[2].last_value)
+                parseFloat(
+                  ada.find((obj) => obj.name == "SENSOR_TEMP").last_value
+                )
               );
               setLabels(tempChartData.labels);
               setData(
                 humidChartData.datasets[0].data,
-                parseFloat(ada[1].last_value)
+                parseFloat(
+                  ada.find((obj) => obj.name == "SENSOR_HUMID").last_value
+                )
               );
               setLabels(humidChartData.labels);
               setData(
                 lightChartData.datasets[0].data,
-                parseFloat(ada[0].last_value)
+                parseFloat(
+                  ada.find((obj) => obj.name == "SENSOR_LIGHT").last_value
+                )
               );
               setLabels(lightChartData.labels);
               // Draw new charts
@@ -921,25 +968,28 @@
               });
             }
             // Update Fan mode
-            if (ada[5].last_value == '"AUTO"' && sessionStorage.getItem("fetching") == "no") {
+            if (
+              ada.find((obj) => obj.name == "MODE").last_value == '"AUTO"' &&
+              sessionStorage.getItem("fetching") == "no"
+            ) {
               document.getElementById("fanMode").checked = true;
               document.getElementById("fanSliderBox").style.display = "none";
             }
-            if (ada[5].last_value == '"MANU"' && sessionStorage.getItem("fetching") == "no") {
+            if (
+              ada.find((obj) => obj.name == "MODE").last_value == '"MANU"' &&
+              sessionStorage.getItem("fetching") == "no"
+            ) {
               document.getElementById("fanMode").checked = false;
-              document.getElementById("fanSliderBox").style.display = "inline-block"
+              document.getElementById("fanSliderBox").style.display =
                 "inline-block";
+              ("inline-block");
             }
             // Update Fan slider value
-            // console.log("ada[4]", ada[4].last_value)
-            // console.log("slider", document.getElementById("fanSliderValue").value)
-            document.getElementById("fanSliderValue").value = parseInt(
-              ada[4].last_value
-            );
-            console.log(
-              "fs value: ",
-              document.getElementById("fanSliderValue").value
-            );
+            if (sessionStorage.getItem("fetching") == "no") {
+              document.getElementById("fanSliderValue").value = parseInt(
+                ada.find((obj) => obj.name == "DEVICE_FAN").last_value
+              );
+            }
             // Dumb function
             function updateDonut(percent, element) {
               //var percent = 45;
@@ -1032,10 +1082,18 @@
             })();
             // Dumb function end
             // Update LED
-            if (ada[3].last_value == '"ON"' && sessionStorage.getItem("fetching") == "no") {
+            if (
+              ada.find((obj) => obj.name == "DEVICE_LED").last_value ==
+                '"ON"' &&
+              sessionStorage.getItem("fetching") == "no"
+            ) {
               document.getElementById("ledSwitch").checked = true;
             }
-            if (ada[3].last_value == '"OFF"' && sessionStorage.getItem("fetching") == "no") {
+            if (
+              ada.find((obj) => obj.name == "DEVICE_LED").last_value ==
+                '"OFF"' &&
+              sessionStorage.getItem("fetching") == "no"
+            ) {
               document.getElementById("ledSwitch").checked = false;
             }
 
@@ -1046,11 +1104,9 @@
       callAdafruit();
       setInterval(callAdafruit, 2000);
       // Send LED
-      document
-        .getElementById("ledSwitch")
-        .addEventListener("click", turnLight);
+      document.getElementById("ledSwitch").addEventListener("click", turnLight);
       async function turnLight(a) {
-        sessionStorage.setItem("fetching","yes");
+        sessionStorage.setItem("fetching", "yes");
         document.getElementById("loading").style.display = "block";
         // post
         var myHeaders = new Headers();
@@ -1078,14 +1134,12 @@
           .catch((error) => console.log("error", error));
 
         document.getElementById("loading").style.display = "none";
-        sessionStorage.setItem("fetching","no");
+        sessionStorage.setItem("fetching", "no");
       }
       // Send Mode
-      document
-        .getElementById("fanMode")
-        .addEventListener("click", changeMode);
+      document.getElementById("fanMode").addEventListener("click", changeMode);
       async function changeMode(a) {
-        sessionStorage.setItem("fetching","yes");
+        sessionStorage.setItem("fetching", "yes");
         document.getElementById("loading").style.display = "block";
         // post
         var myHeaders = new Headers();
@@ -1113,14 +1167,14 @@
           .catch((error) => console.log("error", error));
 
         document.getElementById("loading").style.display = "none";
-        sessionStorage.setItem("fetching","no");
+        sessionStorage.setItem("fetching", "no");
       }
       // Send fan value
       document
         .getElementById("fanSliderValue")
         .addEventListener("click", changeFanSpeed);
       async function changeFanSpeed(a) {
-        sessionStorage.setItem("fetching","yes");
+        sessionStorage.setItem("fetching", "yes");
         document.getElementById("loading").style.display = "block";
         // post
         var myHeaders = new Headers();
@@ -1144,7 +1198,7 @@
           .catch((error) => console.log("error", error));
 
         document.getElementById("loading").style.display = "none";
-        sessionStorage.setItem("fetching","no");
+        sessionStorage.setItem("fetching", "no");
       }
     </script>
     <script src="assets/static/js/components/dark.js"></script>

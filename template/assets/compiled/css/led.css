@@ -1,8 +1,8 @@
-.switch {
+.switchLEDcss {
   position: relative;
   font-size:0.5px;
 }
-.switch input {
+.switchLEDcss input {
   height: 100%;
   width: 100%;
   position: absolute;
@@ -12,15 +12,17 @@
   z-index: 100;
   cursor: pointer;
 }
-.switch label {
+.switchLEDcss label {
   height: 110em;
   width: 220em;
-  background-color: #39315a;
+  /* background-color: #39315a; */
+  background-color: #ffffff;
   border-radius: 100em;
   display: block;
   box-shadow: inset 0 0 20em rgba(0,0,0,0.2), inset 0 0 5em -2em rgba(0,0,0,0.4);
+  border: 0.5px solid black;
 }
-.switch label .bulb {
+.switchLEDcss label .bulb {
   height: 90em;
   width: 90em;
   background-color: #4a426b;
@@ -32,7 +34,7 @@
   transition: 0.7s;
   box-shadow: inset 0 0 1em 3em #4a426b, inset 0 0 6em 8em #423963, 0 20em 30em -10em rgba(0,0,0,0.4);
 }
-.switch label .bulb .bulb-center {
+.switchLEDcss label .bulb .bulb-center {
   position: absolute;
   display: block;
   height: 36em;
@@ -45,7 +47,7 @@
   transform: translate(-50%, -50%);
   box-shadow: inset 0 0 0 4em #635a84;
 }
-.switch label .bulb .bulb-center:after {
+.switchLEDcss label .bulb .bulb-center:after {
   content: "";
   display: block;
   height: 14em;
@@ -59,8 +61,8 @@
   transform: translate(-50%, -50%);
   box-shadow: 0 0 2em 4em #524a73;
 }
-.switch label .bulb .filament-1,
-.switch label .bulb .filament-2 {
+.switchLEDcss label .bulb .filament-1,
+.switchLEDcss label .bulb .filament-2 {
   position: absolute;
   display: block;
   height: 35em;
@@ -71,10 +73,10 @@
   overflow: hidden;
   transform: translate(-50%, -50%) rotate(-45deg);
 }
-.switch label .bulb .filament-1:after,
-.switch label .bulb .filament-2:after,
-.switch label .bulb .filament-1:before,
-.switch label .bulb .filament-2:before {
+.switchLEDcss label .bulb .filament-1:after,
+.switchLEDcss label .bulb .filament-2:after,
+.switchLEDcss label .bulb .filament-1:before,
+.switchLEDcss label .bulb .filament-2:before {
   content: "";
   display: block;
   height: 6em;
@@ -87,12 +89,12 @@
   left: -2em;
   transform: rotate(-10deg);
 }
-.switch label .bulb .filament-1:before,
-.switch label .bulb .filament-2:before {
+.switchLEDcss label .bulb .filament-1:before,
+.switchLEDcss label .bulb .filament-2:before {
   left: 15em;
   transform: rotate(10deg);
 }
-.switch label .bulb .filament-2 {
+.switchLEDcss label .bulb .filament-2 {
   transform: translate(-50%, -50%) rotate(45deg) !important;
 }
 .reflections {
@@ -199,44 +201,44 @@
   transition: 0.4s;
   opacity: 0;
 }
-.switch input:checked ~ label .bulb {
+.switchLEDcss input:checked ~ label .bulb {
   left: 120em;
   background-color: #a7694a;
   box-shadow: inset 0 0 1em 3em #a56758, inset 0 0 6em 8em #6b454f, 0 20em 30em -10em rgba(0,0,0,0.4), 0 0 30em 50em rgba(253,184,67,0.1);
 }
-.switch input:checked ~ label .bulb > .bulb-center {
+.switchLEDcss input:checked ~ label .bulb > .bulb-center {
   background-color: #feed6b;
   box-shadow: inset 0 0 0 4em #fdec6a, 0 0 12em 10em #bca83c, 0 0 20em 14em #a1664a;
 }
-.switch input:checked ~ label .bulb > .bulb-center:after {
+.switchLEDcss input:checked ~ label .bulb > .bulb-center:after {
   background-color: #fef401;
   box-shadow: 0 0 2em 4em #fdb843;
 }
-.switch input:checked ~ label .bulb >.filament-1:before,
-.switch input:checked ~ label .bulb >.filament-2:before,
-.switch input:checked ~ label .bulb >.filament-1:after,
-.switch input:checked ~ label .bulb >.filament-2:after {
+.switchLEDcss input:checked ~ label .bulb >.filament-1:before,
+.switchLEDcss input:checked ~ label .bulb >.filament-2:before,
+.switchLEDcss input:checked ~ label .bulb >.filament-1:after,
+.switchLEDcss input:checked ~ label .bulb >.filament-2:after {
   border-color: #fef4d5;
 }
-.switch input:checked ~ label .bulb > .sparks .spark1 {
+.switchLEDcss input:checked ~ label .bulb > .sparks .spark1 {
   height: 1em;
   width: 1em;
   animation: spark1 2s ease-in-out;
   animation-delay: 0.4s;
 }
-.switch input:checked ~ label .bulb > .sparks .spark2 {
+.switchLEDcss input:checked ~ label .bulb > .sparks .spark2 {
   height: 1em;
   width: 1em;
   animation: spark2 2.4s ease-in-out;
   animation-delay: 0.4s;
 }
-.switch input:checked ~ label .bulb > .sparks .spark3 {
+.switchLEDcss input:checked ~ label .bulb > .sparks .spark3 {
   height: 1em;
   width: 1em;
   animation: spark3 2s ease-in-out;
   animation-delay: 0.9s;
 }
-.switch input:checked ~ label .bulb > .sparks .spark4 {
+.switchLEDcss input:checked ~ label .bulb > .sparks .spark4 {
   height: 1em;
   width: 1em;
   animation: spark4 1.7s ease-in-out;
