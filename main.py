@@ -11,7 +11,7 @@ AIO_FEED_ID4 = "iot.device-led"
 AIO_FEED_ID5 = "iot.device-fan"
 
 AIO_USERNAME = "nguyennamkha"
-AIO_KEY = "aio_LxUX63KoboEKHadj72b9ZbhiWSCl"
+AIO_KEY = ""
 def connected(client):
     print ("Connect successfully...")
     client.subscribe(AIO_FEED_ID)

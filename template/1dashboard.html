@@ -554,12 +554,12 @@
       // some var
       let username = sessionStorage.getItem("username");
       let aiokey = "";
-      let varDeviceFan = "device_fan";
-      let varDeviceLed = "device_light";
-      let varMode = "mode";
-      let varSensorHumid = "sensor_humid";
-      let varSensorLight = "sensor_light";
-      let varSensorTemp = "sensor_temp";
+      let varDeviceFan = "DEVICE_FAN";
+      let varDeviceLed = "DEVICE_LED";
+      let varMode = "MODE";
+      let varSensorHumid = "SENSOR_HUMID";
+      let varSensorLight = "SENSOR_LIGHT";
+      let varSensorTemp = "SENSOR_TEMP";
       // Some functions
       console.log(sessionStorage.getItem("sleep"));
       document.getElementById("loading").style.display = "none";
@@ -697,7 +697,7 @@
       let jump = 2;
       let limit = 10;
       function callAdafruit() {
-        fetchStuff("https://io.adafruit.com/api/v2/hai305/feeds").then(
+        fetchStuff("https://io.adafruit.com/api/v2/nguyennamkha/feeds").then(
           (ada) => {
             // Check sleeping status
             if (sessionStorage.getItem("sleep") == "no") {
@@ -1132,7 +1132,7 @@
         };
 
         await fetch(
-          "https://io.adafruit.com/api/v2/hai305/feeds/device-light/data",
+          "https://io.adafruit.com/api/v2/nguyennamkha/feeds/iot.device-led/data",
           requestOptions
         )
           .then((response) => response.text())
@@ -1165,7 +1165,7 @@
         };
 
         await fetch(
-          "https://io.adafruit.com/api/v2/hai305/feeds/mode/data",
+          "https://io.adafruit.com/api/v2/nguyennamkha/feeds/iot.mode/data",
           requestOptions
         )
           .then((response) => response.text())
@@ -1196,7 +1196,7 @@
         };
 
         await fetch(
-          "https://io.adafruit.com/api/v2/hai305/feeds/device-fan/data",
+          "https://io.adafruit.com/api/v2/nguyennamkha/feeds/iot.device-fan/data",
           requestOptions
         )
           .then((response) => response.text())
