@@ -402,6 +402,7 @@
                         <label class="label" for="toggle">&nbsp;</label>
                       </div>
                     </div>
+                    <div id="irStatus"></div>
                   </div>
                 </div>
                 <div class="col-md-6 mb-4">
@@ -554,12 +555,12 @@
       // some var
       let username = sessionStorage.getItem("username");
       let aiokey = "";
-      let varDeviceFan = "DEVICE_FAN";
-      let varDeviceLed = "DEVICE_LED";
-      let varMode = "MODE";
-      let varSensorHumid = "SENSOR_HUMID";
-      let varSensorLight = "SENSOR_LIGHT";
-      let varSensorTemp = "SENSOR_TEMP";
+      let varDeviceFan = "device_fan";
+      let varDeviceLed = "device_light";
+      let varMode = "mode";
+      let varSensorHumid = "sensor_humid";
+      let varSensorLight = "sensor_light";
+      let varSensorTemp = "sensor_temp";
       // Some functions
       console.log(sessionStorage.getItem("sleep"));
       document.getElementById("loading").style.display = "none";
@@ -618,11 +619,11 @@
           },
         ],
       };
-      var tempconfig = new Chart(tempchart, {
-        type: "line",
-        data: tempChartData,
-        options: options,
-      });
+      // var tempconfig = new Chart(tempchart, {
+      //   type: "line",
+      //   data: tempChartData,
+      //   options: options,
+      // });
       // Draw humid chart
       var humidchart = document.getElementById("humid").getContext("2d");
       var humidChartData = {
@@ -648,11 +649,11 @@
           },
         ],
       };
-      var humidconfig = new Chart(humidchart, {
-        type: "line",
-        data: humidChartData,
-        options: options,
-      });
+      // var humidconfig = new Chart(humidchart, {
+      //   type: "line",
+      //   data: humidChartData,
+      //   options: options,
+      // });
       // Draw light chart
       var lightchart = document.getElementById("light").getContext("2d");
       var lightChartData = {
@@ -678,11 +679,11 @@
           },
         ],
       };
-      var lightconfig = new Chart(lightchart, {
-        type: "line",
-        data: lightChartData,
-        options: options,
-      });
+      // var lightconfig = new Chart(lightchart, {
+      //   type: "line",
+      //   data: lightChartData,
+      //   options: options,
+      // });
 
       let i = 0;
       let tempArray = [];
@@ -696,7 +697,8 @@
       let count = 0;
       let jump = 2;
       let limit = 10;
-      function callAdafruit() {
+
+      function updateEnv() {
         fetchStuff("https://io.adafruit.com/api/v2/nguyennamkha/feeds").then(
           (ada) => {
             // Check sleeping status
@@ -828,7 +830,7 @@
                   ).innerHTML = `<h5 class="card-title pb-3 pt-4" style="color:red">You had a bad sleep</h5>`;
                 }
               });
-            } else {
+            } else if (sessionStorage.getItem("sleep") == "yes") {
               if (sleepT == -1) {
                 sleepT = new Date();
               }
@@ -847,9 +849,7 @@
                   ada.find((obj) => obj.name == varSensorLight).last_value
                 )
               );
-              // console.log(tempArray)
-              // console.log(humidArray)
-              // console.log(lightArray)
+
               tempAverage = parseInt(
                 tempArray.reduce((a, b) => a + b, 0) / tempArray.length
               );
@@ -859,9 +859,7 @@
               lightAverage = parseInt(
                 lightArray.reduce((a, b) => a + b, 0) / lightArray.length
               );
-              // console.log(tempAverage);
-              // console.log(humidAverage);
-              // console.log(lightAverage);
+
               document.getElementById(
                 "irStatus"
               ).innerHTML = `<div class="card-body pb-0">
@@ -930,59 +928,63 @@
                             </span>`;
             document.getElementById("currentLight").innerHTML = newLight;
             i++;
-            if (count % 10 == 0) {
-              // Update new chart data
-              setData(
-                tempChartData.datasets[0].data,
-                parseFloat(
-                  ada.find((obj) => obj.name == varSensorTemp).last_value
-                )
-              );
-              setLabels(tempChartData.labels);
-              setData(
-                humidChartData.datasets[0].data,
-                parseFloat(
-                  ada.find((obj) => obj.name == varSensorHumid).last_value
-                )
-              );
-              setLabels(humidChartData.labels);
-              setData(
-                lightChartData.datasets[0].data,
-                parseFloat(
-                  ada.find((obj) => obj.name == varSensorLight).last_value
-                )
-              );
-              setLabels(lightChartData.labels);
-              // Draw new charts
-              tempconfig.destroy();
-              tempconfig = new Chart(tempchart, {
-                type: "line",
-                data: tempChartData,
-                options: options,
-              });
-              humidconfig.destroy();
-              humidconfig = new Chart(humidchart, {
-                type: "line",
-                data: humidChartData,
-                options: options,
-              });
-              lightconfig.destroy();
-              lightconfig = new Chart(lightchart, {
-                type: "line",
-                data: lightChartData,
-                options: options,
-              });
-            }
+            // Update new chart data
+            setData(
+              tempChartData.datasets[0].data,
+              parseFloat(
+                ada.find((obj) => obj.name == varSensorTemp).last_value
+              )
+            );
+            setLabels(tempChartData.labels);
+            setData(
+              humidChartData.datasets[0].data,
+              parseFloat(
+                ada.find((obj) => obj.name == varSensorHumid).last_value
+              )
+            );
+            setLabels(humidChartData.labels);
+            setData(
+              lightChartData.datasets[0].data,
+              parseFloat(
+                ada.find((obj) => obj.name == varSensorLight).last_value
+              )
+            );
+            setLabels(lightChartData.labels);
+            // Draw new charts
+            tempconfig.destroy();
+            tempconfig = new Chart(tempchart, {
+              type: "line",
+              data: tempChartData,
+              options: options,
+            });
+            humidconfig.destroy();
+            humidconfig = new Chart(humidchart, {
+              type: "line",
+              data: humidChartData,
+              options: options,
+            });
+            lightconfig.destroy();
+            lightconfig = new Chart(lightchart, {
+              type: "line",
+              data: lightChartData,
+              options: options,
+            });
+          }
+        );
+      }
+      function updateDev() {
+        fetchStuff("https://io.adafruit.com/api/v2/nguyennamkha/feeds").then(
+          (ada) => {
             // Update Fan mode
             if (
-              ada.find((obj) => obj.name == varMode).last_value == 'AUTO' &&
+              ada.find((obj) => obj.name == varMode).last_value == "AUTO" &&
               sessionStorage.getItem("fetching") == "no"
             ) {
               document.getElementById("fanMode").checked = true;
               document.getElementById("fanSliderBox").style.display = "none";
             }
             if (
-              ada.find((obj) => obj.name == varMode).last_value == 'MANU' &&
+              ada.find((obj) => obj.name == varMode).last_value == "MANU" &&
               sessionStorage.getItem("fetching") == "no"
             ) {
               document.getElementById("fanMode").checked = false;
@@ -1089,26 +1091,26 @@
             // Dumb function end
             // Update LED
             if (
-              ada.find((obj) => obj.name == varDeviceLed).last_value ==
-                'ON' &&
+              ada.find((obj) => obj.name == varDeviceLed).last_value == "ON" &&
               sessionStorage.getItem("fetching") == "no"
             ) {
               document.getElementById("ledSwitch").checked = true;
             }
             if (
-              ada.find((obj) => obj.name == varDeviceLed).last_value ==
-                'OFF' &&
+              ada.find((obj) => obj.name == varDeviceLed).last_value == "OFF" &&
               sessionStorage.getItem("fetching") == "no"
             ) {
               document.getElementById("ledSwitch").checked = false;
             }
-
-            count = count + jump;
           }
         );
       }
-      callAdafruit();
-      setInterval(callAdafruit, 2000);
+
+      updateEnv();
+      setInterval(updateEnv, 10000);
+      updateDev();
+      setInterval(updateDev, 2000);
+
       // Send LED
       document.getElementById("ledSwitch").addEventListener("click", turnLight);
       async function turnLight(a) {
@@ -1120,9 +1122,9 @@
         myHeaders.append("X-AIO-Key", aiokey);
         var urlencoded = new URLSearchParams();
         if (a.target.checked == true) {
-          urlencoded.append("value", 'ON');
+          urlencoded.append("value", "ON");
         } else {
-          urlencoded.append("value", 'OFF');
+          urlencoded.append("value", "OFF");
         }
         var requestOptions = {
           method: "POST",
@@ -1132,7 +1134,7 @@
         };
 
         await fetch(
-          "https://io.adafruit.com/api/v2/nguyennamkha/feeds/iot.device-led/data",
+          "https://io.adafruit.com/api/v2/nguyennamkha/feeds/device-light/data",
           requestOptions
         )
           .then((response) => response.text())
@@ -1153,9 +1155,9 @@
         myHeaders.append("X-AIO-Key", aiokey);
         var urlencoded = new URLSearchParams();
         if (a.target.checked == true) {
-          urlencoded.append("value", 'AUTO');
+          urlencoded.append("value", "AUTO");
         } else {
-          urlencoded.append("value", 'MANU');
+          urlencoded.append("value", "MANU");
         }
         var requestOptions = {
           method: "POST",
@@ -1165,7 +1167,7 @@
         };
 
         await fetch(
-          "https://io.adafruit.com/api/v2/nguyennamkha/feeds/iot.mode/data",
+          "https://io.adafruit.com/api/v2/nguyennamkha/feeds/mode/data",
           requestOptions
         )
           .then((response) => response.text())
@@ -1196,7 +1198,7 @@
         };
 
         await fetch(
-          "https://io.adafruit.com/api/v2/nguyennamkha/feeds/iot.device-fan/data",
+          "https://io.adafruit.com/api/v2/nguyennamkha/feeds/device-fan/data",
           requestOptions
         )
           .then((response) => response.text())

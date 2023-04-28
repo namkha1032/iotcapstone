@@ -3,22 +3,17 @@ from Adafruit_IO import MQTTClient
 import random
 import time
 
-AIO_FEED_ID = "iot.sensor-humid"
-AIO_FEED_ID2 = "iot.sensor-temp"
-AIO_FEED_ID3 = "iot.sensor-light"
-AIO_FEED_ID3 = "iot.sensor-ir"
-AIO_FEED_ID4 = "iot.device-led"
-AIO_FEED_ID5 = "iot.device-fan"
+AIO_FEED_ID1 = "sensor-humid"
+AIO_FEED_ID2 = "sensor-temp"
+AIO_FEED_ID3 = "sensor-light"
 
 AIO_USERNAME = "nguyennamkha"
 AIO_KEY = ""
 def connected(client):
     print ("Connect successfully...")
-    client.subscribe(AIO_FEED_ID)
+    client.subscribe(AIO_FEED_ID1)
     client.subscribe(AIO_FEED_ID2)
     client.subscribe(AIO_FEED_ID3)
-    client.subscribe(AIO_FEED_ID4)
-    client.subscribe(AIO_FEED_ID5)
 
 def subscribe(client,userdata,mid,granted_qos):
     print("Subcribe successfully...")
@@ -42,7 +37,7 @@ client.loop_background()
 while True:
     measuredTemp = random.randint(0, 40)
     print ("Measured temperature is :", measuredTemp )
-    client.publish("iot.sensor-temp", measuredTemp)
+    client.publish("sensor-temp", measuredTemp)
 
     # deviceFan = 0
     # if measuredTemp in range(0,11):
@@ -57,11 +52,11 @@ while True:
 
     measuredHumid = random.randint(0, 100)
     print ("Measured humidity is :", measuredHumid )
-    client.publish("iot.sensor-humid", measuredHumid)
+    client.publish("sensor-humid", measuredHumid)
     
     measuredLight = random.randint(0, 100)
     print ("Measured light is :", measuredLight )
-    client.publish("iot.sensor-light", measuredLight)
+    client.publish("sensor-light", measuredLight)
     
     # measuredIR = random.randint(0, 1)
     # print ("Measured IR is :", measuredIR )
