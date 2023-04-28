@@ -110,11 +110,36 @@
         console.log(username)
         console.log(password)
         // 
+        let tempAPIArray = await fetchStuff("https://io.adafruit.com/api/v2/nguyennamkha/feeds/sensor-temp/data")
+        let humidAPIArray = await fetchStuff("https://io.adafruit.com/api/v2/nguyennamkha/feeds/sensor-humid/data")
+        let lightAPIArray = await fetchStuff("https://io.adafruit.com/api/v2/nguyennamkha/feeds/sensor-light/data")
+        let tempSessionChart = tempAPIArray.map(obj=>parseFloat(obj.value))
+        let humidSessionChart = humidAPIArray.map(obj=>parseFloat(obj.value))
+        let lightSessionChart = lightAPIArray.map(obj=>parseFloat(obj.value))
+        tempSessionChart = tempSessionChart.slice(0,7)
+        humidSessionChart = humidSessionChart.slice(0,7)
+        lightSessionChart = lightSessionChart.slice(0,7)
+        // console.log(typeof(tempSessionArray))
+        // console.log(typeof(humidSessionArray))
+        // console.log(typeof(lightSessionArray))
+        // console.log(tempSessionArray)
+        // console.log(humidSessionArray)
+        // console.log(lightSessionArray)
+        sessionStorage.setItem("tempSessionChart", JSON.stringify(tempSessionChart))
+        sessionStorage.setItem("humidSessionChart", JSON.stringify(humidSessionChart))
+        sessionStorage.setItem("lightSessionChart", JSON.stringify(lightSessionChart))
+        console.log(typeof(JSON.parse(sessionStorage.getItem("tempSessionChart"))))
+        console.log(typeof(JSON.parse(sessionStorage.getItem("humidSessionChart"))))
+        console.log(typeof(JSON.parse(sessionStorage.getItem("lightSessionChart"))))
+        console.log(JSON.parse(sessionStorage.getItem("tempSessionChart")))
+        console.log(JSON.parse(sessionStorage.getItem("humidSessionChart")))
+        console.log(JSON.parse(sessionStorage.getItem("lightSessionChart")))
+        sessionStorage.setItem("wors",1)
         await fetchStuff(`http://localhost:3000/history?username=${username}`).then(db=>{
           // check valid
           sessionStorage.setItem("username",username);
-          console.log(db);
-          window.location.href="1dashboard.html"
+          console.log(sessionStorage.getItem("username"))
+          // window.location.href="1dashboard.html"
         })
       }
     </script>
