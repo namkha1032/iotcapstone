@@ -594,6 +594,7 @@
         //Number - The scale starting value
         scaleStartValue: 0,
       };
+      initdata = [1,9,4,7,3,8,2]
       // Draw temp chart
       var tempchart = document.getElementById("temp").getContext("2d");
       var tempChartData = {
@@ -615,15 +616,15 @@
             pointStrokeColor: "#fff",
             pointHighlightFill: "#fff",
             pointHighlightStroke: "rgba(220,220,220,1)",
-            data: [0, 0, 0, 0, 0, 0, 0],
+            data: [...initdata],
           },
         ],
       };
-      // var tempconfig = new Chart(tempchart, {
-      //   type: "line",
-      //   data: tempChartData,
-      //   options: options,
-      // });
+      var tempconfig = new Chart(tempchart, {
+        type: "line",
+        data: tempChartData,
+        options: options,
+      });
       // Draw humid chart
       var humidchart = document.getElementById("humid").getContext("2d");
       var humidChartData = {
@@ -645,15 +646,15 @@
             pointStrokeColor: "#fff",
             pointHighlightFill: "#fff",
             pointHighlightStroke: "rgba(220,220,220,1)",
-            data: [0, 0, 0, 0, 0, 0, 0],
+            data: [...initdata],
           },
         ],
       };
-      // var humidconfig = new Chart(humidchart, {
-      //   type: "line",
-      //   data: humidChartData,
-      //   options: options,
-      // });
+      var humidconfig = new Chart(humidchart, {
+        type: "line",
+        data: humidChartData,
+        options: options,
+      });
       // Draw light chart
       var lightchart = document.getElementById("light").getContext("2d");
       var lightChartData = {
@@ -675,15 +676,15 @@
             pointStrokeColor: "#fff",
             pointHighlightFill: "#fff",
             pointHighlightStroke: "rgba(220,220,220,1)",
-            data: [0, 0, 0, 0, 0, 0, 0],
+            data: [...initdata],
           },
         ],
       };
-      // var lightconfig = new Chart(lightchart, {
-      //   type: "line",
-      //   data: lightChartData,
-      //   options: options,
-      // });
+      var lightconfig = new Chart(lightchart, {
+        type: "line",
+        data: lightChartData,
+        options: options,
+      });
 
       let i = 0;
       let tempArray = [];

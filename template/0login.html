@@ -107,6 +107,8 @@
       async function handleLogin(a){
         let username = document.getElementById("usernameForm").value
         let password = document.getElementById("passwordForm").value
+        console.log(username)
+        console.log(password)
         // 
         await fetchStuff(`http://localhost:3000/history?username=${username}`).then(db=>{
           // check valid
