@@ -553,7 +553,13 @@
     <script>
       // some var
       let username = sessionStorage.getItem("username");
-      let aiokey = "aio_LxUX63KoboEKHadj72b9ZbhiWSCl";
+      let aiokey = "";
+      let varDeviceFan = "device_fan";
+      let varDeviceLed = "device_light";
+      let varMode = "mode";
+      let varSensorHumid = "sensor_humid";
+      let varSensorLight = "sensor_light";
+      let varSensorTemp = "sensor_temp";
       // Some functions
       console.log(sessionStorage.getItem("sleep"));
       document.getElementById("loading").style.display = "none";
@@ -691,7 +697,7 @@
       let jump = 2;
       let limit = 10;
       function callAdafruit() {
-        fetchStuff("https://io.adafruit.com/api/v2/nguyennamkha/feeds").then(
+        fetchStuff("https://io.adafruit.com/api/v2/hai305/feeds").then(
           (ada) => {
             // Check sleeping status
             if (sessionStorage.getItem("sleep") == "no") {
@@ -828,17 +834,17 @@
               }
               tempArray.push(
                 parseFloat(
-                  ada.find((obj) => obj.name == "SENSOR_TEMP").last_value
+                  ada.find((obj) => obj.name == varSensorTemp).last_value
                 )
               );
               humidArray.push(
                 parseFloat(
-                  ada.find((obj) => obj.name == "SENSOR_HUMID").last_value
+                  ada.find((obj) => obj.name == varSensorHumid).last_value
                 )
               );
               lightArray.push(
                 parseFloat(
-                  ada.find((obj) => obj.name == "SENSOR_LIGHT").last_value
+                  ada.find((obj) => obj.name == varSensorLight).last_value
                 )
               );
               // console.log(tempArray)
@@ -896,7 +902,7 @@
                               readonly
                             >
                             ${
-                              ada.find((obj) => obj.name == "SENSOR_TEMP")
+                              ada.find((obj) => obj.name == varSensorTemp)
                                 .last_value
                             } <sup>o</sup>C
                             </span>`;
@@ -907,7 +913,7 @@
                               readonly
                             >
                             ${
-                              ada.find((obj) => obj.name == "SENSOR_HUMID")
+                              ada.find((obj) => obj.name == varSensorHumid)
                                 .last_value
                             } %
                             </span>`;
@@ -918,7 +924,7 @@
                               readonly
                             >
                             ${
-                              ada.find((obj) => obj.name == "SENSOR_LIGHT")
+                              ada.find((obj) => obj.name == varSensorLight)
                                 .last_value
                             } %
                             </span>`;
@@ -929,21 +935,21 @@
               setData(
                 tempChartData.datasets[0].data,
                 parseFloat(
-                  ada.find((obj) => obj.name == "SENSOR_TEMP").last_value
+                  ada.find((obj) => obj.name == varSensorTemp).last_value
                 )
               );
               setLabels(tempChartData.labels);
               setData(
                 humidChartData.datasets[0].data,
                 parseFloat(
-                  ada.find((obj) => obj.name == "SENSOR_HUMID").last_value
+                  ada.find((obj) => obj.name == varSensorHumid).last_value
                 )
               );
               setLabels(humidChartData.labels);
               setData(
                 lightChartData.datasets[0].data,
                 parseFloat(
-                  ada.find((obj) => obj.name == "SENSOR_LIGHT").last_value
+                  ada.find((obj) => obj.name == varSensorLight).last_value
                 )
               );
               setLabels(lightChartData.labels);
@@ -969,14 +975,14 @@
             }
             // Update Fan mode
             if (
-              ada.find((obj) => obj.name == "MODE").last_value == '"AUTO"' &&
+              ada.find((obj) => obj.name == varMode).last_value == 'AUTO' &&
               sessionStorage.getItem("fetching") == "no"
             ) {
               document.getElementById("fanMode").checked = true;
               document.getElementById("fanSliderBox").style.display = "none";
             }
             if (
-              ada.find((obj) => obj.name == "MODE").last_value == '"MANU"' &&
+              ada.find((obj) => obj.name == varMode).last_value == 'MANU' &&
               sessionStorage.getItem("fetching") == "no"
             ) {
               document.getElementById("fanMode").checked = false;
@@ -987,7 +993,7 @@
             // Update Fan slider value
             if (sessionStorage.getItem("fetching") == "no") {
               document.getElementById("fanSliderValue").value = parseInt(
-                ada.find((obj) => obj.name == "DEVICE_FAN").last_value
+                ada.find((obj) => obj.name == varDeviceFan).last_value
               );
             }
             // Dumb function
@@ -1083,15 +1089,15 @@
             // Dumb function end
             // Update LED
             if (
-              ada.find((obj) => obj.name == "DEVICE_LED").last_value ==
-                '"ON"' &&
+              ada.find((obj) => obj.name == varDeviceLed).last_value ==
+                'ON' &&
               sessionStorage.getItem("fetching") == "no"
             ) {
               document.getElementById("ledSwitch").checked = true;
             }
             if (
-              ada.find((obj) => obj.name == "DEVICE_LED").last_value ==
-                '"OFF"' &&
+              ada.find((obj) => obj.name == varDeviceLed).last_value ==
+                'OFF' &&
               sessionStorage.getItem("fetching") == "no"
             ) {
               document.getElementById("ledSwitch").checked = false;
@@ -1114,9 +1120,9 @@
         myHeaders.append("X-AIO-Key", aiokey);
         var urlencoded = new URLSearchParams();
         if (a.target.checked == true) {
-          urlencoded.append("value", '"ON"');
+          urlencoded.append("value", 'ON');
         } else {
-          urlencoded.append("value", '"OFF"');
+          urlencoded.append("value", 'OFF');
         }
         var requestOptions = {
           method: "POST",
@@ -1126,7 +1132,7 @@
         };
 
         await fetch(
-          "https://io.adafruit.com/api/v2/nguyennamkha/feeds/iot.device-led/data",
+          "https://io.adafruit.com/api/v2/hai305/feeds/device-light/data",
           requestOptions
         )
           .then((response) => response.text())
@@ -1147,9 +1153,9 @@
         myHeaders.append("X-AIO-Key", aiokey);
         var urlencoded = new URLSearchParams();
         if (a.target.checked == true) {
-          urlencoded.append("value", '"AUTO"');
+          urlencoded.append("value", 'AUTO');
         } else {
-          urlencoded.append("value", '"MANU"');
+          urlencoded.append("value", 'MANU');
         }
         var requestOptions = {
           method: "POST",
@@ -1159,7 +1165,7 @@
         };
 
         await fetch(
-          "https://io.adafruit.com/api/v2/nguyennamkha/feeds/iot.mode/data",
+          "https://io.adafruit.com/api/v2/hai305/feeds/mode/data",
           requestOptions
         )
           .then((response) => response.text())
@@ -1190,7 +1196,7 @@
         };
 
         await fetch(
-          "https://io.adafruit.com/api/v2/nguyennamkha/feeds/iot.device-fan/data",
+          "https://io.adafruit.com/api/v2/hai305/feeds/device-fan/data",
           requestOptions
         )
           .then((response) => response.text())
