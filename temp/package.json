@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "start": "json-server --watch db.json"
+  },
+  "dependencies": {
+    "json-server": "^0.17.3",
+    "mathjs": "^11.8.0"
+  }
+}

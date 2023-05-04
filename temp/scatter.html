@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Plotly.js -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+
+    <!-- Plotly chart will be drawn inside this DIV -->
+    <div id="myDiv" style="width:100%;height:100%"></div>
+    <button type="button" class="button" id="this_button">Click here for update</button>
+    <script>
+        /* Scatter Plot */
+        var trace0 = {
+            x: [3, 1],
+            y: [4, 7],
+            z: [6, 9],
+            mode: 'markers',
+            marker: {
+                size: 12,
+                line: {
+                    color: 'rgba(217, 217, 217, 0.14)',
+                    width: 0.5
+                },
+                opacity: 0.8
+            },
+            type: 'scatter3d'
+        };
+
+        var trace1 = {
+            x: [1],
+            y: [3],
+            z: [4],
+            mode: 'markers',
+            marker: {
+                size: 8,
+                line: {
+                    color: 'rgba(217, 217, 217, 0.14)',
+                    width: 0.5
+                },
+                mode: 'markers',
+                opacity: 0.8
+            },
+            type: 'scatter3d'
+        };
+
+        var data = [trace0, trace1];
+        var layout = {
+            margin: {
+                l: 0,
+                r: 0,
+                b: 0,
+                t: 0
+            },
+            xaxis: {
+                title: "Humid"
+            },
+            yaxis: {
+                title: "Light"
+            },
+            zaxis: {
+                title: "Temperature"
+            }
+        };
+        Plotly.newPlot('scatterChart', data, layout);
+
+    </script>
+</body>
+
+</html>

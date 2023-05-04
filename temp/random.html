@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random</title>
+</head>
+
+<body>
+    "history": [
+    <div id="randomHis">
+    </div>
+    ],
+
+
+    <script>
+        function getRandomFloat(min, max, decimals) {
+            const str = (Math.random() * (max - min) + min).toFixed(decimals);
+
+            return parseFloat(str);
+        }
+        function gaussianRandom(mean = 0, stdev = 1, decimals, min, max) {
+            let z;
+            do {
+                let u = 1 - Math.random(); // Converting [0,1) to (0,1]
+                let v = Math.random();
+                z = Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
+                z = parseFloat(z * stdev + mean).toFixed(decimals)
+            } while(z < min || z > max)
+            // Transform to the desired mean and standard deviation:
+            return z;
+        }
+        let i = 1
+        for (i = 1; i < 101; i++) {
+            let curr = new Date()
+            curr = curr.toLocaleString();
+            let rand = getRandomFloat(0, 100, 0)
+            let sleepQua = "good"
+            if (rand < 70) {
+                sleepQua = "good"
+            }
+            else {
+                sleepQua = "bad"
+            }
+            let temp;
+            let humid;
+            let light;
+            if (sleepQua == "good"){
+                temp = gaussianRandom(25,2,1,20,30)
+                humid = gaussianRandom(50,15,0,0,100)
+                light = gaussianRandom(0,40,0,0,100)
+            }
+            else {
+                temp = gaussianRandom(30,2,1,25,30)
+                let z = getRandomFloat(0,100,0)
+                if (z<50){
+                    humid = gaussianRandom(0,15,0,0,50)
+                }
+                else{
+                    humid = gaussianRandom(100,15,0,50,100)
+                }
+                light = gaussianRandom(100,40,0,0,100)
+            }
+            let newHis = `<div>
+                {<br>
+                    &nbsp;&nbsp;"sleepTime": "${curr}",<br>
+                    &nbsp;&nbsp;"wakeTime": "${curr}",<br>
+                    &nbsp;&nbsp;"temp": ${temp},<br>
+                    &nbsp;&nbsp;"humid": ${humid},<br>
+                    &nbsp;&nbsp;"light": ${light},<br>
+                    &nbsp;&nbsp;"quality": "${sleepQua}",<br>
+                    &nbsp;&nbsp;"username": "namkha",<br>
+                    &nbsp;&nbsp;"id": ${i}<br>
+                },<br>
+              </div>`
+            var div = document.createElement("template");
+            div.innerHTML = newHis;
+            newHis = div.content.firstElementChild;
+            document.getElementById("randomHis").appendChild(newHis)
+
+        }
+    </script>
+</body>
+
+</html>

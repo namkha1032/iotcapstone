@@ -8,7 +8,7 @@ AIO_FEED_ID2 = "sensor-temp"
 AIO_FEED_ID3 = "sensor-light"
 
 AIO_USERNAME = "nguyennamkha"
-AIO_KEY = "aio_xrnx28veckSXlgLWUIcb87D0jWgv"
+AIO_KEY = ""
 def connected(client):
     print ("Connect successfully...")
     client.subscribe(AIO_FEED_ID1)
@@ -35,7 +35,7 @@ client.connect()
 client.loop_background()
 
 while True:
-    measuredTemp = random.randint(0, 40)
+    measuredTemp = random.randint(20, 30)
     print ("Measured temperature is :", measuredTemp )
     client.publish("sensor-temp", measuredTemp)
 

@@ -1,0 +1,1055 @@
+<script>
+  async function fetchStuff(str) {
+    const response = await fetch(str);
+    const data = await response.json();
+    return data;
+  }
+  async function postpatchData(url = "", data = {}, apiMethod) {
+    // Default options are marked with *
+    const response = await fetch(url, {
+      method: apiMethod, // *GET, POST, PUT, DELETE, etc.
+      mode: "cors", // no-cors, *cors, same-origin
+      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+      credentials: "same-origin", // include, *same-origin, omit
+      headers: {
+        "Content-Type": "application/json",
+        "X-AIO-Key": aiokey,
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      redirect: "follow", // manual, *follow, error
+      referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+      body: JSON.stringify(data), // body data type must match "Content-Type" header
+    });
+    return response.json(); // parses JSON response into native JavaScript objects
+  }
+
+  let aiokey = "aio_CxBa15STe6ynllwYJNxu3Hrb3mN0";
+  let str = `[
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 28,
+      "humid": 55,
+      "light": 18,
+      "quality": "good",
+      "username": "user1",
+      "id": 1
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 25.4,
+      "humid": 20,
+      "light": 7,
+      "quality": "good",
+      "username": "user1",
+      "id": 2
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 23.6,
+      "humid": 49,
+      "light": 55,
+      "quality": "good",
+      "username": "user1",
+      "id": 3
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 30,
+      "humid": 92,
+      "light": 71,
+      "quality": "bad",
+      "username": "user1",
+      "id": 4
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 28.2,
+      "humid": 77,
+      "light": 59,
+      "quality": "good",
+      "username": "user1",
+      "id": 5
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 24.3,
+      "humid": 44,
+      "light": 58,
+      "quality": "good",
+      "username": "user1",
+      "id": 6
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 26.2,
+      "humid": 46,
+      "light": 26,
+      "quality": "good",
+      "username": "user1",
+      "id": 7
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 27,
+      "humid": 91,
+      "light": 70,
+      "quality": "bad",
+      "username": "user1",
+      "id": 8
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 25.4,
+      "humid": 64,
+      "light": 37,
+      "quality": "good",
+      "username": "user1",
+      "id": 9
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 24.5,
+      "humid": 52,
+      "light": 39,
+      "quality": "good",
+      "username": "user1",
+      "id": 10
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 23.7,
+      "humid": 59,
+      "light": 9,
+      "quality": "good",
+      "username": "user1",
+      "id": 11
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 23.9,
+      "humid": 69,
+      "light": 65,
+      "quality": "good",
+      "username": "user1",
+      "id": 12
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 22.3,
+      "humid": 42,
+      "light": 16,
+      "quality": "good",
+      "username": "user1",
+      "id": 13
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 28.3,
+      "humid": 84,
+      "light": 53,
+      "quality": "bad",
+      "username": "user1",
+      "id": 14
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 25.1,
+      "humid": 59,
+      "light": 39,
+      "quality": "good",
+      "username": "user1",
+      "id": 15
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 28.3,
+      "humid": 15,
+      "light": 94,
+      "quality": "bad",
+      "username": "user1",
+      "id": 16
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 22.6,
+      "humid": 55,
+      "light": 23,
+      "quality": "good",
+      "username": "user1",
+      "id": 17
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 25,
+      "humid": 33,
+      "light": 44,
+      "quality": "good",
+      "username": "user1",
+      "id": 18
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 29.6,
+      "humid": 84,
+      "light": 93,
+      "quality": "bad",
+      "username": "user1",
+      "id": 19
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 27.8,
+      "humid": 98,
+      "light": 60,
+      "quality": "bad",
+      "username": "user1",
+      "id": 20
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 28.6,
+      "humid": 80,
+      "light": 61,
+      "quality": "bad",
+      "username": "user1",
+      "id": 21
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 26.1,
+      "humid": 56,
+      "light": 10,
+      "quality": "good",
+      "username": "user1",
+      "id": 22
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 23,
+      "humid": 51,
+      "light": 9,
+      "quality": "good",
+      "username": "user1",
+      "id": 23
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 25.9,
+      "humid": 100,
+      "light": 99,
+      "quality": "bad",
+      "username": "user1",
+      "id": 24
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 27.1,
+      "humid": 87,
+      "light": 65,
+      "quality": "bad",
+      "username": "user1",
+      "id": 25
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 29.5,
+      "humid": 93,
+      "light": 30,
+      "quality": "bad",
+      "username": "user1",
+      "id": 26
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 24.4,
+      "humid": 60,
+      "light": 35,
+      "quality": "good",
+      "username": "user1",
+      "id": 27
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 22.2,
+      "humid": 73,
+      "light": 42,
+      "quality": "good",
+      "username": "user1",
+      "id": 28
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 28.8,
+      "humid": 61,
+      "light": 62,
+      "quality": "good",
+      "username": "user1",
+      "id": 29
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 23.4,
+      "humid": 40,
+      "light": 62,
+      "quality": "good",
+      "username": "user1",
+      "id": 30
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 21.9,
+      "humid": 25,
+      "light": 25,
+      "quality": "good",
+      "username": "user1",
+      "id": 31
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 24.2,
+      "humid": 27,
+      "light": 26,
+      "quality": "good",
+      "username": "user1",
+      "id": 32
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 27.4,
+      "humid": 20,
+      "light": 24,
+      "quality": "good",
+      "username": "user1",
+      "id": 33
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 29.8,
+      "humid": 92,
+      "light": 60,
+      "quality": "bad",
+      "username": "user1",
+      "id": 34
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 28.2,
+      "humid": 5,
+      "light": 91,
+      "quality": "bad",
+      "username": "user1",
+      "id": 35
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 27,
+      "humid": 67,
+      "light": 52,
+      "quality": "good",
+      "username": "user1",
+      "id": 36
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 29.9,
+      "humid": 10,
+      "light": 28,
+      "quality": "bad",
+      "username": "user1",
+      "id": 37
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 24.5,
+      "humid": 77,
+      "light": 12,
+      "quality": "good",
+      "username": "user1",
+      "id": 38
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 26.5,
+      "humid": 62,
+      "light": 44,
+      "quality": "good",
+      "username": "user1",
+      "id": 39
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 23.4,
+      "humid": 35,
+      "light": 26,
+      "quality": "good",
+      "username": "user1",
+      "id": 40
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 21.3,
+      "humid": 36,
+      "light": 5,
+      "quality": "good",
+      "username": "user1",
+      "id": 41
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 24.7,
+      "humid": 61,
+      "light": 66,
+      "quality": "good",
+      "username": "user1",
+      "id": 42
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 26.4,
+      "humid": 36,
+      "light": 27,
+      "quality": "good",
+      "username": "user1",
+      "id": 43
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 23.6,
+      "humid": 56,
+      "light": 52,
+      "quality": "good",
+      "username": "user1",
+      "id": 44
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 23.4,
+      "humid": 46,
+      "light": 14,
+      "quality": "good",
+      "username": "user1",
+      "id": 45
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 28.2,
+      "humid": 3,
+      "light": 52,
+      "quality": "bad",
+      "username": "user1",
+      "id": 46
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 28,
+      "humid": 30,
+      "light": 80,
+      "quality": "bad",
+      "username": "user1",
+      "id": 47
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 26.1,
+      "humid": 51,
+      "light": 91,
+      "quality": "good",
+      "username": "user1",
+      "id": 48
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 28.3,
+      "humid": 53,
+      "light": 5,
+      "quality": "good",
+      "username": "user1",
+      "id": 49
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 25.8,
+      "humid": 42,
+      "light": 4,
+      "quality": "good",
+      "username": "user1",
+      "id": 50
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 25.5,
+      "humid": 47,
+      "light": 63,
+      "quality": "good",
+      "username": "user1",
+      "id": 51
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 27.1,
+      "humid": 95,
+      "light": 79,
+      "quality": "bad",
+      "username": "user1",
+      "id": 52
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 22.7,
+      "humid": 35,
+      "light": 15,
+      "quality": "good",
+      "username": "user1",
+      "id": 53
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 25.4,
+      "humid": 31,
+      "light": 37,
+      "quality": "good",
+      "username": "user1",
+      "id": 54
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 24.7,
+      "humid": 31,
+      "light": 8,
+      "quality": "good",
+      "username": "user1",
+      "id": 55
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 27.7,
+      "humid": 39,
+      "light": 90,
+      "quality": "good",
+      "username": "user1",
+      "id": 56
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 28.1,
+      "humid": 94,
+      "light": 51,
+      "quality": "bad",
+      "username": "user1",
+      "id": 57
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 26,
+      "humid": 58,
+      "light": 0,
+      "quality": "good",
+      "username": "user1",
+      "id": 58
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 22.8,
+      "humid": 61,
+      "light": 9,
+      "quality": "good",
+      "username": "user1",
+      "id": 59
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 26,
+      "humid": 43,
+      "light": 4,
+      "quality": "good",
+      "username": "user1",
+      "id": 60
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 24.7,
+      "humid": 64,
+      "light": 67,
+      "quality": "good",
+      "username": "user1",
+      "id": 61
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 29.7,
+      "humid": 75,
+      "light": 96,
+      "quality": "bad",
+      "username": "user1",
+      "id": 62
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 27.3,
+      "humid": 53,
+      "light": 22,
+      "quality": "good",
+      "username": "user1",
+      "id": 63
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 28.3,
+      "humid": 93,
+      "light": 100,
+      "quality": "bad",
+      "username": "user1",
+      "id": 64
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 25.5,
+      "humid": 60,
+      "light": 52,
+      "quality": "good",
+      "username": "user1",
+      "id": 65
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 25.9,
+      "humid": 59,
+      "light": 14,
+      "quality": "good",
+      "username": "user1",
+      "id": 66
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 23.2,
+      "humid": 46,
+      "light": 29,
+      "quality": "good",
+      "username": "user1",
+      "id": 67
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 24.9,
+      "humid": 52,
+      "light": 14,
+      "quality": "good",
+      "username": "user1",
+      "id": 68
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 29.7,
+      "humid": 9,
+      "light": 86,
+      "quality": "bad",
+      "username": "user1",
+      "id": 69
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 23.9,
+      "humid": 8,
+      "light": 33,
+      "quality": "good",
+      "username": "user1",
+      "id": 70
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 29.3,
+      "humid": 6,
+      "light": 98,
+      "quality": "bad",
+      "username": "user1",
+      "id": 71
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 23.2,
+      "humid": 63,
+      "light": 16,
+      "quality": "good",
+      "username": "user1",
+      "id": 72
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 27.5,
+      "humid": 3,
+      "light": 94,
+      "quality": "bad",
+      "username": "user1",
+      "id": 73
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 27.7,
+      "humid": 71,
+      "light": 2,
+      "quality": "good",
+      "username": "user1",
+      "id": 74
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 23.8,
+      "humid": 53,
+      "light": 8,
+      "quality": "good",
+      "username": "user1",
+      "id": 75
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 27.7,
+      "humid": 57,
+      "light": 21,
+      "quality": "good",
+      "username": "user1",
+      "id": 76
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 22.5,
+      "humid": 60,
+      "light": 14,
+      "quality": "good",
+      "username": "user1",
+      "id": 77
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 29.1,
+      "humid": 5,
+      "light": 53,
+      "quality": "bad",
+      "username": "user1",
+      "id": 78
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 24.3,
+      "humid": 48,
+      "light": 61,
+      "quality": "good",
+      "username": "user1",
+      "id": 79
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 22.5,
+      "humid": 51,
+      "light": 8,
+      "quality": "good",
+      "username": "user1",
+      "id": 80
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 28.5,
+      "humid": 74,
+      "light": 67,
+      "quality": "bad",
+      "username": "user1",
+      "id": 81
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 28.7,
+      "humid": 98,
+      "light": 41,
+      "quality": "bad",
+      "username": "user1",
+      "id": 82
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 28.7,
+      "humid": 48,
+      "light": 30,
+      "quality": "good",
+      "username": "user1",
+      "id": 83
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 29.2,
+      "humid": 86,
+      "light": 81,
+      "quality": "bad",
+      "username": "user1",
+      "id": 84
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 26,
+      "humid": 57,
+      "light": 14,
+      "quality": "good",
+      "username": "user1",
+      "id": 85
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 27.7,
+      "humid": 17,
+      "light": 34,
+      "quality": "bad",
+      "username": "user1",
+      "id": 86
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 21.8,
+      "humid": 41,
+      "light": 17,
+      "quality": "good",
+      "username": "user1",
+      "id": 87
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 30,
+      "humid": 1,
+      "light": 85,
+      "quality": "bad",
+      "username": "user1",
+      "id": 88
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 29.1,
+      "humid": 19,
+      "light": 60,
+      "quality": "bad",
+      "username": "user1",
+      "id": 89
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 28.2,
+      "humid": 81,
+      "light": 35,
+      "quality": "good",
+      "username": "user1",
+      "id": 90
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 20.8,
+      "humid": 52,
+      "light": 39,
+      "quality": "good",
+      "username": "user1",
+      "id": 91
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 25.6,
+      "humid": 32,
+      "light": 38,
+      "quality": "good",
+      "username": "user1",
+      "id": 92
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 22.7,
+      "humid": 30,
+      "light": 40,
+      "quality": "good",
+      "username": "user1",
+      "id": 93
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 25.3,
+      "humid": 61,
+      "light": 18,
+      "quality": "good",
+      "username": "user1",
+      "id": 94
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 27.6,
+      "humid": 5,
+      "light": 90,
+      "quality": "bad",
+      "username": "user1",
+      "id": 95
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 26.3,
+      "humid": 83,
+      "light": 87,
+      "quality": "bad",
+      "username": "user1",
+      "id": 96
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 23.6,
+      "humid": 37,
+      "light": 27,
+      "quality": "good",
+      "username": "user1",
+      "id": 97
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 21.6,
+      "humid": 36,
+      "light": 16,
+      "quality": "good",
+      "username": "user1",
+      "id": 98
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 23.4,
+      "humid": 62,
+      "light": 4,
+      "quality": "good",
+      "username": "user1",
+      "id": 99
+    },
+    {
+      "sleepTime": "17:24:16 2/5/2023",
+      "wakeTime": "17:24:16 2/5/2023",
+      "temp": 23.8,
+      "humid": 42,
+      "light": 8,
+      "quality": "good",
+      "username": "user1",
+      "id": 100
+    },
+    {
+      "sleepTime": "19:14:26 2/5/2023",
+      "wakeTime": "19:14:55 2/5/2023",
+      "temp": 23.3,
+      "humid": 30,
+      "light": 33.3,
+      "quality": "good",
+      "username": "user1",
+      "id": 101
+    }
+  ]`
+  let arr = JSON.parse(str)
+  async function initData() {
+    for (let obj of arr) {
+      let newHis = {
+        sleepTime: obj.sleepTime,
+        wakeTime: obj.wakeTime,
+        temp: obj.temp,
+        humid: obj.humid,
+        light: obj.light,
+        quality: obj.quality,
+        username: obj.username,
+      };
+      await postpatchData("http://localhost:5000/history", newHis, "POST")
+    }
+  }
+  initData()
+</script>
