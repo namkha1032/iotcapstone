@@ -3,6 +3,7 @@
     "start": "json-server --watch db.json"
   },
   "dependencies": {
+    "dotenv": "^16.0.3",
     "json-server": "^0.17.3",
     "mathjs": "^11.8.0"
   }
