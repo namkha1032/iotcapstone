@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="pageContent">
+        <h1>My note</h1>
+        <div id="noteList">
+
+        </div>
+        <input type="text" id="noteInput">
+        <button type="submit" id="addNoteButton">Submit</button>
+    </div>
+    <script>
+        document.getElementById("addNoteButton").addEventListener("click", handleNoteInput)
+        async function handleNoteInput(e) {
+            let noteObj = {
+                context: document.getElementById("noteInput").value
+            }
+            // Add note to database
+            let noteReturn = await fetch("localhost:3000/note", {
+                method: "POST", 
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(noteObj),
+            });
+            let pElement = document.createElement("p")
+            pElement.innerHTML = noteReturn.context
+            document.getElementById("noteList").append(pElement)
+        }
+    </script>
+</body>
+
+</html>

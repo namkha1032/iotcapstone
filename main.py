@@ -8,7 +8,7 @@ AIO_FEED_ID2 = "sensor-temp"
 AIO_FEED_ID3 = "sensor-light"
 
 AIO_USERNAME = "nguyennamkha"
-AIO_KEY = "aio_BrUo26TdZK5ysTfwZ1lpn2GgFGgI"
+AIO_KEY = "aio_gUwP09HhvB2Y7luVdXNvoom0TVqu"
 def connected(client):
     print ("Connect successfully...")
     client.subscribe(AIO_FEED_ID1)
